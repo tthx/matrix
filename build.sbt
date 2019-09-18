@@ -4,15 +4,28 @@ version := "0.1"
 scalaVersion := "2.12.10"
 onChangedBuildSource := ReloadOnSourceChanges
 
-val sparkVersion = "2.4.4"
+import scalariform.formatter.preferences._
+includeFilter in scalariformFormat := "*.scala" || "*.sbt"
 
-libraryDependencies ++= Seq("org.apache.spark" %% "spark-core" % sparkVersion % Provided,
-"org.apache.spark" %% "spark-mllib" % sparkVersion % Provided,
-"com.github.fommil.netlib" % "all" % "1.1.2",
-"org.scalactic" %% "scalactic" % "3.0.8",
-"org.scalacheck" %% "scalacheck" % "1.14.0" % Test,
-"org.specs2" %% "specs2-core" % "4.6.0" % Test,
-"org.scalatest"    %% "scalatest"  % "3.0.8" % Test)
+val sparkVersion = "2.4.4"
+val hadoopVersion = "3.2.0"
+val netlibVersion = "1.1.2"
+val scalacticVersion = "3.0.8"
+val scalacheckVersion = "1.14.0"
+val specs2coreVersion = "4.6.0"
+val scalatestVersion = "3.0.8"
+
+libraryDependencies ++= Seq(
+  "org.apache.spark" %% "spark-core" % sparkVersion % Provided,
+  "org.apache.spark" %% "spark-mllib" % sparkVersion % Provided,
+  "org.apache.hadoop" % "hadoop-client" % hadoopVersion % Provided
+    exclude ("javax.ws.rs", "jsr311-api")
+    exclude ("com.sun.jersey", "jersey-server"),
+  "com.github.fommil.netlib" % "all" % netlibVersion,
+  "org.scalactic" %% "scalactic" % scalacticVersion,
+  "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test,
+  "org.specs2" %% "specs2-core" % specs2coreVersion % Test,
+  "org.scalatest" %% "scalatest" % scalatestVersion % Test)
 
 scalacOptions in Test ++= Seq("-Yrangepos")
 
@@ -40,11 +53,11 @@ assemblyMergeStrategy in assembly := {
     oldStrategy(x)
 }
 
-/* including scala bloats your assembly jar unnecessarily, and may interfere with 
+/* including scala bloats your assembly jar unnecessarily, and may interfere with
    spark runtime */
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
 assemblyJarName in assembly := "matrixMultiply.jar"
 
-/* you need to be able to undo the "provided" annotation on the deps when running your spark 
+/* you need to be able to undo the "provided" annotation on the deps when running your spark
    programs locally i.e. from sbt; this bit reincludes the full classpaths in the compile and run tasks. */
 fullClasspath in Runtime := (fullClasspath in (Compile, run)).value
