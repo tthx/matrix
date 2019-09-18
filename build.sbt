@@ -4,7 +4,7 @@ version := "0.1"
 scalaVersion := "2.12.10"
 onChangedBuildSource := ReloadOnSourceChanges
 
-resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"
+// resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"
 
 val sparkVersion = "2.4.4"
 
