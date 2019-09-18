@@ -4,12 +4,10 @@ version := "0.1"
 scalaVersion := "2.12.10"
 onChangedBuildSource := ReloadOnSourceChanges
 
-// resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"
-
 val sparkVersion = "2.4.4"
 
-libraryDependencies ++= Seq("org.apache.spark" %% "spark-core" % sparkVersion % provided,
-"org.apache.spark" %% "spark-mllib" % sparkVersion % provided,
+libraryDependencies ++= Seq("org.apache.spark" %% "spark-core" % sparkVersion % Provided,
+"org.apache.spark" %% "spark-mllib" % sparkVersion % Provided,
 "com.github.fommil.netlib" % "all" % "1.1.2",
 "org.scalactic" %% "scalactic" % "3.0.8",
 "org.scalacheck" %% "scalacheck" % "1.14.0" % Test,
