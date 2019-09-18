@@ -34,7 +34,7 @@ assemblyMergeStrategy in assembly := {
   case "META-INF/mimetypes.default"                 => MergeStrategy.last
   case "plugin.properties"                          => MergeStrategy.last
   case "log4j.properties"                           => MergeStrategy.last
-  case "git.properties"                           => MergeStrategy.last
+  case "git.properties"                             => MergeStrategy.last
   case x =>
     val oldStrategy = (assemblyMergeStrategy in assembly).value
     oldStrategy(x)
