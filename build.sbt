@@ -4,9 +4,6 @@ version := "0.1"
 scalaVersion := "2.12.10"
 onChangedBuildSource := ReloadOnSourceChanges
 
-import scalariform.formatter.preferences._
-includeFilter in scalariformFormat := "*.scala" || "*.sbt"
-
 val sparkVersion = "2.4.4"
 val hadoopVersion = "3.2.0"
 val netlibVersion = "1.1.2"
@@ -16,16 +13,17 @@ val specs2coreVersion = "4.6.0"
 val scalatestVersion = "3.0.8"
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % sparkVersion % Provided,
-  "org.apache.spark" %% "spark-mllib" % sparkVersion % Provided,
+  "org.apache.spark"  %% "spark-core"   % sparkVersion  % Provided,
+  "org.apache.spark"  %% "spark-mllib"  % sparkVersion  % Provided,
   "org.apache.hadoop" % "hadoop-client" % hadoopVersion % Provided
     exclude ("javax.ws.rs", "jsr311-api")
     exclude ("com.sun.jersey", "jersey-server"),
-  "com.github.fommil.netlib" % "all" % netlibVersion,
-  "org.scalactic" %% "scalactic" % scalacticVersion,
-  "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test,
-  "org.specs2" %% "specs2-core" % specs2coreVersion % Test,
-  "org.scalatest" %% "scalatest" % scalatestVersion % Test)
+  "com.github.fommil.netlib" % "all"          % netlibVersion,
+  "org.scalactic"            %% "scalactic"   % scalacticVersion,
+  "org.scalacheck"           %% "scalacheck"  % scalacheckVersion % Test,
+  "org.specs2"               %% "specs2-core" % specs2coreVersion % Test,
+  "org.scalatest"            %% "scalatest"   % scalatestVersion % Test
+)
 
 scalacOptions in Test ++= Seq("-Yrangepos")
 
