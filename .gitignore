@@ -1,5 +1,10 @@
 target
 
+### Eclipse ###
+.settings
+.classpath
+.project
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
