@@ -59,8 +59,7 @@ import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundWriteExcep
  * pour limiter le domaine de definition: les matrices, ici, se limitent aux
  * operations arithmetiques.
  * 
- * @param <T>
- *            Type des elements d'une matrice
+ * @param <T> Type des elements d'une matrice
  */
 public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 
@@ -86,17 +85,16 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		BigDecimal(7, "BigDecimal");
 
 		/**
-		 * Identifiant en un nombre entier d'un type. Les identifiants sont
-		 * ordonnes: soient {@code id1} et {@code id2} deux identifiants, si
-		 * {@code id1.typeID >=
+		 * Identifiant en un nombre entier d'un type. Les identifiants sont ordonnes:
+		 * soient {@code id1} et {@code id2} deux identifiants, si {@code id1.typeID >=
 		 * id2.typeID} alors {@code id1} occupe en memoire/disque un espace plus
 		 * important que {@code id2}.
 		 */
 		private final int typeID;
 
 		/**
-		 * Identifiant en une chaine de caractere d'un type respectant l'ordre
-		 * de l'identifiant en un nombre entier.
+		 * Identifiant en une chaine de caractere d'un type respectant l'ordre de
+		 * l'identifiant en un nombre entier.
 		 */
 		private final String descriptionID;
 
@@ -121,10 +119,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		/**
 		 * Constructeur d'un {@code DataType}.
 		 *
-		 * @param typeID
-		 *            la partie en un nombre entier d'un type
-		 * @param descriptionID
-		 *            la partie en une chaine de caractere d'un type
+		 * @param typeID        la partie en un nombre entier d'un type
+		 * @param descriptionID la partie en une chaine de caractere d'un type
 		 */
 		DataType(final int typeID, final String descriptionID) {
 			this.typeID = typeID;
@@ -133,8 +129,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	};
 
 	/**
-	 * Permet, d'un entier, de retrouver le {@code DataType} correspondant, si
-	 * il existe.
+	 * Permet, d'un entier, de retrouver le {@code DataType} correspondant, si il
+	 * existe.
 	 */
 	@SuppressWarnings("serial")
 	public static final Map<Integer, DataType> DataTypeID = new HashMap<Integer, DataType>() {
@@ -184,9 +180,9 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	private DataType dataType = null;
 
 	/**
-	 * Le nombre zero du type des elements d'une matrice. Par exemple,
-	 * {@code ZERO} a la valeur {@code BigDecimal.ZERO} si le membre
-	 * {@code dataType} a la valeur {@code DataType.BigDecimal}.
+	 * Le nombre zero du type des elements d'une matrice. Par exemple, {@code ZERO}
+	 * a la valeur {@code BigDecimal.ZERO} si le membre {@code dataType} a la valeur
+	 * {@code DataType.BigDecimal}.
 	 */
 	private T ZERO = null;
 
@@ -196,10 +192,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Fonction permettant d'allouer les elements d'une matrice.
 	 * 
-	 * @param n
-	 *            le nombre de ligne
-	 * @param m
-	 *            le nombre de colonne
+	 * @param n le nombre de ligne
+	 * @param m le nombre de colonne
 	 * @return un tableau a deux dimensions
 	 */
 	private BiFunction<Integer, Integer, T[][]> newDataFunction = null;
@@ -207,8 +201,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Fonction permettant de lire un element dans un flux.
 	 * 
-	 * @param in
-	 *            le flux ou lire
+	 * @param in le flux ou lire
 	 * @return l'element lu
 	 * @throw {@link java.io.IOException}
 	 */
@@ -217,10 +210,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Fonction permettant d'ecrire un element dans un flux.
 	 * 
-	 * @param out
-	 *            le flux ou ecrire
-	 * @param x
-	 *            l'element a ecrire
+	 * @param out le flux ou ecrire
+	 * @param x   l'element a ecrire
 	 * @throw {@link java.io.IOException}
 	 */
 	private BiConsumerWithException<DataOutput, T, IOException> writeDataFunction = null;
@@ -228,10 +219,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Fonction permettant sauter un nombre de byte dans un flux.
 	 * 
-	 * @param in
-	 *            le flux concerne
-	 * @param n
-	 *            le nombre de byte a sauter
+	 * @param in le flux concerne
+	 * @param n  le nombre de byte a sauter
 	 * @throw {@link java.io.IOException}
 	 */
 	private BiConsumerWithException<DataInput, Integer, IOException> skipDataFunction = null;
@@ -255,8 +244,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Retourne le tableau a deux dimensions constitue des elements d'une
-	 * matrice.
+	 * Retourne le tableau a deux dimensions constitue des elements d'une matrice.
 	 *
 	 * @return le tableau a deux dimensions constitue des elements d'une matrice
 	 */
@@ -267,13 +255,11 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Retourne un element d'une matrice.
 	 *
-	 * @param i
-	 *            indice d'une ligne
-	 * @param j
-	 *            indice d'une colonne
+	 * @param i indice d'une ligne
+	 * @param j indice d'une colonne
 	 * @return un element d'une matrice
-	 * @throws MatrixBoundReadException
-	 *             si {@code i} ou {@code j} sont hors des bornes d'une matrice
+	 * @throws MatrixBoundReadException si {@code i} ou {@code j} sont hors des
+	 *                                  bornes d'une matrice
 	 */
 	public T getData(final int i, final int j) throws MatrixBoundReadException {
 		if ((i >= 0) && (i < n) && (j >= 0) && (j < m))
@@ -285,17 +271,13 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Positionne un element d'une matrice.
 	 *
-	 * @param i
-	 *            indice d'une ligne
-	 * @param j
-	 *            indice d'une colonne
-	 * @param x
-	 *            l'element a positionner
-	 * @throws MatrixBoundWriteException
-	 *             si {@code i} ou {@code j} sont hors des bornes d'une matrice
+	 * @param i indice d'une ligne
+	 * @param j indice d'une colonne
+	 * @param x l'element a positionner
+	 * @throws MatrixBoundWriteException si {@code i} ou {@code j} sont hors des
+	 *                                   bornes d'une matrice
 	 */
-	public void setData(final int i, final int j, final T x)
-			throws MatrixBoundWriteException {
+	public void setData(final int i, final int j, final T x) throws MatrixBoundWriteException {
 		if ((i >= 0) && (i < n) && (j >= 0) && (j < m))
 			data[i][j] = x;
 		else
@@ -314,8 +296,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Positionne le type des elements d'une matrice.
 	 *
-	 * @param dataType
-	 *            le type des elements d'une matrice
+	 * @param dataType le type des elements d'une matrice
 	 */
 	public void setDataType(DataType dataType) {
 		this.dataType = dataType;
@@ -333,11 +314,9 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Positionne la fonction d'allocation des elements d'une matrice.
 	 *
-	 * @param newDataFunction
-	 *            la fonction d'allocation des elements d'une matrice
+	 * @param newDataFunction la fonction d'allocation des elements d'une matrice
 	 */
-	public void setNewDataFunction(
-			final BiFunction<Integer, Integer, T[][]> newDataFunction) {
+	public void setNewDataFunction(final BiFunction<Integer, Integer, T[][]> newDataFunction) {
 		this.newDataFunction = newDataFunction;
 	}
 
@@ -351,14 +330,12 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Positionne la fonction de lecture d'un element d'une matrice dans un
-	 * flux.
+	 * Positionne la fonction de lecture d'un element d'une matrice dans un flux.
 	 *
-	 * @param readDataFunction
-	 *            la fonction de lecture d'un element d'une matrice dans un flux
+	 * @param readDataFunction la fonction de lecture d'un element d'une matrice
+	 *                         dans un flux
 	 */
-	public void setReadDataFunction(
-			final FunctionWithException<DataInput, T, IOException> readDataFunction) {
+	public void setReadDataFunction(final FunctionWithException<DataInput, T, IOException> readDataFunction) {
 		this.readDataFunction = readDataFunction;
 	}
 
@@ -372,14 +349,12 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Positionne la fonction d'ecriture d'un element d'une matrice dans un
-	 * flux.
+	 * Positionne la fonction d'ecriture d'un element d'une matrice dans un flux.
 	 *
-	 * @param writeDataFunction
-	 *            la fonction d'ecriture d'un element d'une matrice dans un flux
+	 * @param writeDataFunction la fonction d'ecriture d'un element d'une matrice
+	 *                          dans un flux
 	 */
-	public void setWriteDataFunction(
-			final BiConsumerWithException<DataOutput, T, IOException> writeDataFunction) {
+	public void setWriteDataFunction(final BiConsumerWithException<DataOutput, T, IOException> writeDataFunction) {
 		this.writeDataFunction = writeDataFunction;
 	}
 
@@ -395,73 +370,54 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Positionne la fonction de saut d'un nombre de byte d'un flux.
 	 *
-	 * @param skipDataFunction
-	 *            la fonction de saut d'un nombre de byte d'un flux
+	 * @param skipDataFunction la fonction de saut d'un nombre de byte d'un flux
 	 */
-	public void setSkipDataFunction(
-			BiConsumerWithException<DataInput, Integer, IOException> skipDataFunction) {
+	public void setSkipDataFunction(BiConsumerWithException<DataInput, Integer, IOException> skipDataFunction) {
 		this.skipDataFunction = skipDataFunction;
 	}
 
 	/**
 	 * Initialise les membres d'une matrice.
 	 *
-	 * @param n
-	 *            le nombre de ligne
-	 * @param m
-	 *            le nombre de colonne
-	 * @param dataType
-	 *            le type des elements
-	 * @param ZERO
-	 *            l'element zero
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue
-	 * @param value
-	 *            une valeur qui sera affectee a tous les elements d'une
-	 *            matrice, si {@code alloc} est {@code true}
-	 * @param random
-	 *            des valeurs aleatoires seront affectees a tous les elements
-	 *            d'une matrice, si {@code alloc} est {@code true} et si
-	 *            {@code value} est {@code null}
-	 * @param conf
-	 *            une configuration de Apache Hadoop
-	 * @param f
-	 *            un nom de fichier ou ecrire tous les elements d'une matrice
-	 * @param newDataFunction
-	 *            la fonction d'allocation des elements d'une matrice
-	 * @param readDataFunction
-	 *            la fonction de lecture d'un element d'une matrice dans un flux
-	 * @param writeDataFunction
-	 *            la fonction d'ecriture d'un element d'une matrice dans un flux
-	 * @param skipDataFunction
-	 *            la fonction de saut d'un nombre de byte dans un flux
-	 * @param randomDataFunction
-	 *            la fonction generant un nombre alleatoire correspondant au
-	 *            type des element d'une matrice
-	 * @param convertionDataFunction
-	 *            la fonction de conversion d'une chaine de caractere au type
-	 *            des elements d'une matrice
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param n                      le nombre de ligne
+	 * @param m                      le nombre de colonne
+	 * @param dataType               le type des elements
+	 * @param ZERO                   l'element zero
+	 * @param alloc                  si {@code true} alors l'espace reserve aux
+	 *                               elements sera alloue, si {@code false} alors
+	 *                               l'espace reserve aux elements ne sera pas
+	 *                               alloue
+	 * @param value                  une valeur qui sera affectee a tous les
+	 *                               elements d'une matrice, si {@code alloc} est
+	 *                               {@code true}
+	 * @param random                 des valeurs aleatoires seront affectees a tous
+	 *                               les elements d'une matrice, si {@code alloc}
+	 *                               est {@code true} et si {@code value} est
+	 *                               {@code null}
+	 * @param conf                   une configuration de Apache Hadoop
+	 * @param f                      un nom de fichier ou ecrire tous les elements
+	 *                               d'une matrice
+	 * @param newDataFunction        la fonction d'allocation des elements d'une
+	 *                               matrice
+	 * @param readDataFunction       la fonction de lecture d'un element d'une
+	 *                               matrice dans un flux
+	 * @param writeDataFunction      la fonction d'ecriture d'un element d'une
+	 *                               matrice dans un flux
+	 * @param skipDataFunction       la fonction de saut d'un nombre de byte dans un
+	 *                               flux
+	 * @param randomDataFunction     la fonction generant un nombre alleatoire
+	 *                               correspondant au type des element d'une matrice
+	 * @param convertionDataFunction la fonction de conversion d'une chaine de
+	 *                               caractere au type des elements d'une matrice
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	private void init(
-			final int n,
-			final int m,
-			final DataType dataType,
-			final T ZERO,
-			final boolean alloc,
-			final String value,
-			final boolean random,
-			final Configuration conf,
-			final Path f,
+	private void init(final int n, final int m, final DataType dataType, final T ZERO, final boolean alloc,
+			final String value, final boolean random, final Configuration conf, final Path f,
 			final BiFunction<Integer, Integer, T[][]> newDataFunction,
 			final FunctionWithException<DataInput, T, IOException> readDataFunction,
 			final BiConsumerWithException<DataOutput, T, IOException> writeDataFunction,
 			final BiConsumerWithException<DataInput, Integer, IOException> skipDataFunction,
-			final Function<Random, T> randomDataFunction,
-			final Function<String, T> convertionDataFunction)
+			final Function<Random, T> randomDataFunction, final Function<String, T> convertionDataFunction)
 			throws IOException {
 		this.n = n;
 		this.m = m;
@@ -484,8 +440,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			}
 			for (int i = 0; i < n; i++)
 				for (int j = 0; j < m; j++) {
-					T x = (value != null) ? convertionDataFunction.apply(value)
-							: randomDataFunction.apply(r);
+					T x = (value != null) ? convertionDataFunction.apply(value) : randomDataFunction.apply(r);
 					if (f != null)
 						writeDataFunction.apply(out, x);
 					if (alloc)
@@ -497,29 +452,22 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Initialise les membres d'une matrice à partir des membres d'une autre
-	 * matrice mais avec d'autres valeurs aux dimensions et aux ressources
-	 * allouees aux elements.
+	 * Initialise les membres d'une matrice à partir des membres d'une autre matrice
+	 * mais avec d'autres valeurs aux dimensions et aux ressources allouees aux
+	 * elements.
 	 *
-	 * @param n
-	 *            le nombre de ligne
-	 * @param m
-	 *            le nombre de colonne
-	 * @param x
-	 *            la matrice ou sera recupere des valeurs
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param n     le nombre de ligne
+	 * @param m     le nombre de colonne
+	 * @param x     la matrice ou sera recupere des valeurs
+	 * @param alloc si {@code true} alors l'espace reserve aux elements sera alloue,
+	 *              si {@code false} alors l'espace reserve aux elements ne sera pas
+	 *              alloue
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	private void init(final int n, final int m, final Matrix<T> x,
-			final boolean alloc) {
+	private void init(final int n, final int m, final Matrix<T> x, final boolean alloc) {
 		try {
-			init(n, m, x.dataType, x.ZERO, alloc, null, false, null, null,
-					x.newDataFunction, x.readDataFunction, x.writeDataFunction,
-					x.skipDataFunction, null, null);
+			init(n, m, x.dataType, x.ZERO, alloc, null, false, null, null, x.newDataFunction, x.readDataFunction,
+					x.writeDataFunction, x.skipDataFunction, null, null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -527,11 +475,10 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Initialise les membres d'une matrice avec les valeurs des membres d'une
-	 * autre matrice. Attention: La matrice initialisee ne sera pas un clone.
+	 * Initialise les membres d'une matrice avec les valeurs des membres d'une autre
+	 * matrice. Attention: La matrice initialisee ne sera pas un clone.
 	 *
-	 * @param x
-	 *            la matrice ou sera recupere des valeurs
+	 * @param x la matrice ou sera recupere des valeurs
 	 */
 	void init(final Matrix<T> x) {
 		n = x.n;
@@ -548,65 +495,47 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Instancie une nouvelle matrice en initialisant ses membres.
 	 *
-	 * @param n
-	 *            le nombre de ligne
-	 * @param m
-	 *            le nombre de colonne
-	 * @param dataType
-	 *            le type des elements
-	 * @param ZERO
-	 *            l'element zero
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue
-	 * @param value
-	 *            une valeur qui sera affectee a tous les elements d'une
-	 *            matrice, si {@code alloc} est {@code true}
-	 * @param random
-	 *            des valeurs aleatoires seront affectees a tous les elements
-	 *            d'une matrice, si {@code alloc} est {@code true} et si
-	 *            {@code value} est {@code null}
-	 * @param conf
-	 *            une configuration de Apache Hadoop
-	 * @param f
-	 *            un nom de fichier ou ecrire tous les elements d'une matrice
-	 * @param newDataFunction
-	 *            la fonction d'allocation des elements d'une matrice
-	 * @param readDataFunction
-	 *            la fonction de lecture d'un element d'une matrice dans un flux
-	 * @param writeDataFunction
-	 *            la fonction d'ecriture d'un element d'une matrice dans un flux
-	 * @param skipDataFunction
-	 *            la fonction de saut d'un nombre de byte dans un flux
-	 * @param randomDataFunction
-	 *            la fonction generant un nombre alleatoire correspondant au
-	 *            type des element d'une matrice
-	 * @param convertionDataFunction
-	 *            la fonction de conversion d'une chaine de caractere au type
-	 *            des elements d'une matrice
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param n                      le nombre de ligne
+	 * @param m                      le nombre de colonne
+	 * @param dataType               le type des elements
+	 * @param ZERO                   l'element zero
+	 * @param alloc                  si {@code true} alors l'espace reserve aux
+	 *                               elements sera alloue, si {@code false} alors
+	 *                               l'espace reserve aux elements ne sera pas
+	 *                               alloue
+	 * @param value                  une valeur qui sera affectee a tous les
+	 *                               elements d'une matrice, si {@code alloc} est
+	 *                               {@code true}
+	 * @param random                 des valeurs aleatoires seront affectees a tous
+	 *                               les elements d'une matrice, si {@code alloc}
+	 *                               est {@code true} et si {@code value} est
+	 *                               {@code null}
+	 * @param conf                   une configuration de Apache Hadoop
+	 * @param f                      un nom de fichier ou ecrire tous les elements
+	 *                               d'une matrice
+	 * @param newDataFunction        la fonction d'allocation des elements d'une
+	 *                               matrice
+	 * @param readDataFunction       la fonction de lecture d'un element d'une
+	 *                               matrice dans un flux
+	 * @param writeDataFunction      la fonction d'ecriture d'un element d'une
+	 *                               matrice dans un flux
+	 * @param skipDataFunction       la fonction de saut d'un nombre de byte dans un
+	 *                               flux
+	 * @param randomDataFunction     la fonction generant un nombre alleatoire
+	 *                               correspondant au type des element d'une matrice
+	 * @param convertionDataFunction la fonction de conversion d'une chaine de
+	 *                               caractere au type des elements d'une matrice
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	public Matrix(
-			final int n,
-			final int m,
-			final DataType dataType,
-			final T ZERO,
-			final boolean alloc,
-			final String value,
-			final boolean random,
-			final Configuration conf,
-			final Path f,
+	public Matrix(final int n, final int m, final DataType dataType, final T ZERO, final boolean alloc,
+			final String value, final boolean random, final Configuration conf, final Path f,
 			final BiFunction<Integer, Integer, T[][]> newDataFunction,
 			final FunctionWithException<DataInput, T, IOException> readDataFunction,
 			final BiConsumerWithException<DataOutput, T, IOException> writeDataFunction,
 			final BiConsumerWithException<DataInput, Integer, IOException> skipDataFunction,
-			final Function<Random, T> randomDataFunction,
-			final Function<String, T> convertionDataFunction)
+			final Function<Random, T> randomDataFunction, final Function<String, T> convertionDataFunction)
 			throws IOException {
-		init(n, m, dataType, ZERO, alloc, value, random, conf, f,
-				newDataFunction, readDataFunction, writeDataFunction,
+		init(n, m, dataType, ZERO, alloc, value, random, conf, f, newDataFunction, readDataFunction, writeDataFunction,
 				skipDataFunction, randomDataFunction, convertionDataFunction);
 	}
 
@@ -617,29 +546,25 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Instancie une nouvelle matrice en recuperant les valeurs des membres
-	 * d'une autre matrice. Attention: la nouvelle matrice n'est pas un clone.
+	 * Instancie une nouvelle matrice en recuperant les valeurs des membres d'une
+	 * autre matrice. Attention: la nouvelle matrice n'est pas un clone.
 	 *
-	 * @param x
-	 *            la matrice ou sera recupere des valeurs
+	 * @param x la matrice ou sera recupere des valeurs
 	 */
 	public Matrix(final Matrix<T> x) {
 		init(x);
 	}
 
 	/**
-	 * Instancie une nouvelle matrice en recuperant les valeurs des membres
-	 * d'une autre matrice {@code x} en precisant si un nouvel espace, des memes
-	 * dimensions que {@code x}, sera reserve aux elements de la nouvelle
-	 * matrice.
+	 * Instancie une nouvelle matrice en recuperant les valeurs des membres d'une
+	 * autre matrice {@code x} en precisant si un nouvel espace, des memes
+	 * dimensions que {@code x}, sera reserve aux elements de la nouvelle matrice.
 	 *
-	 * @param x
-	 *            la matrice ou sera recupere des valeurs
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue et la nouvelle matrice aura le meme espace
-	 *            des elements que le parametre {@code x}
+	 * @param x     la matrice ou sera recupere des valeurs
+	 * @param alloc si {@code true} alors l'espace reserve aux elements sera alloue,
+	 *              si {@code false} alors l'espace reserve aux elements ne sera pas
+	 *              alloue et la nouvelle matrice aura le meme espace des elements
+	 *              que le parametre {@code x}
 	 */
 	public Matrix(final Matrix<T> x, final boolean alloc) {
 		init(x.n, x.m, x, alloc);
@@ -648,24 +573,19 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Instancie une nouvelle matrice en recuperant les valeurs des membres
-	 * d'une autre matrice {@code x} en precisant, par {@code alloc}, si un
-	 * nouvel espace, de dimensions differentes, par {@code n} et {@code m}, que
-	 * {@code x}, sera reserve aux elements de la nouvelle matrice.
+	 * Instancie une nouvelle matrice en recuperant les valeurs des membres d'une
+	 * autre matrice {@code x} en precisant, par {@code alloc}, si un nouvel espace,
+	 * de dimensions differentes, par {@code n} et {@code m}, que {@code x}, sera
+	 * reserve aux elements de la nouvelle matrice.
 	 *
-	 * @param n
-	 *            le nombre de ligne
-	 * @param m
-	 *            le nombre de colonne
-	 * @param x
-	 *            la matrice ou sera recupere des valeurs
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue
+	 * @param n     le nombre de ligne
+	 * @param m     le nombre de colonne
+	 * @param x     la matrice ou sera recupere des valeurs
+	 * @param alloc si {@code true} alors l'espace reserve aux elements sera alloue,
+	 *              si {@code false} alors l'espace reserve aux elements ne sera pas
+	 *              alloue
 	 */
-	public Matrix(final int n, final int m, final Matrix<T> x,
-			final boolean alloc) {
+	public Matrix(final int n, final int m, final Matrix<T> x, final boolean alloc) {
 		init(n, m, x, alloc);
 	}
 
@@ -679,45 +599,35 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	 * <li>Si {@code x.dataType.typeID > y.dataType.typeID} alors le type des
 	 * elements de la nouvelle matrice est {@code x.dataType}, sinon
 	 * {@code y.dataType},
-	 * <li>Si {@code x.dataType=DataType.Byte} ou
-	 * {@code x.dataType=DataType.Short} et si {@code y.dataType=DataType.Byte}
-	 * ou {@code y.dataType=DataType.Short} alors le type des elements de la
-	 * nouvelle matrice est {@code DataType.Integer},
+	 * <li>Si {@code x.dataType=DataType.Byte} ou {@code x.dataType=DataType.Short}
+	 * et si {@code y.dataType=DataType.Byte} ou {@code y.dataType=DataType.Short}
+	 * alors le type des elements de la nouvelle matrice est
+	 * {@code DataType.Integer},
 	 * <li>Si {@code x.dataType=DataType.BigInteger} ou
 	 * {@code y.dataType=DataType.BigInteger} et si
-	 * {@code x.dataType=DataType.Float} ou {@code x.dataType=DataType.Double}
-	 * ou {@code y.dataType=DataType.Float} ou
-	 * {@code y.dataType=DataType.Double} alors le type des elements de la
-	 * nouvelle matrice est {@code DataType.BigDecimal}.
+	 * {@code x.dataType=DataType.Float} ou {@code x.dataType=DataType.Double} ou
+	 * {@code y.dataType=DataType.Float} ou {@code y.dataType=DataType.Double} alors
+	 * le type des elements de la nouvelle matrice est {@code DataType.BigDecimal}.
 	 * </ul>
 	 * 
-	 * @param n
-	 *            le nombre de ligne
-	 * @param m
-	 *            le nombre de colonne
-	 * @param x
-	 *            une matrice
-	 * @param y
-	 *            une matrice
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue
+	 * @param n     le nombre de ligne
+	 * @param m     le nombre de colonne
+	 * @param x     une matrice
+	 * @param y     une matrice
+	 * @param alloc si {@code true} alors l'espace reserve aux elements sera alloue,
+	 *              si {@code false} alors l'espace reserve aux elements ne sera pas
+	 *              alloue
 	 * @return la nouvelle matrice
 	 */
-	public static Matrix<? extends Number> builder(final int n, final int m,
-			final Matrix<? extends Number> x, final Matrix<? extends Number> y,
-			final boolean alloc) {
+	public static Matrix<? extends Number> builder(final int n, final int m, final Matrix<? extends Number> x,
+			final Matrix<? extends Number> y, final boolean alloc) {
 		Matrix<? extends Number> r = null;
-		DataType dataType = (x.dataType.typeID > y.dataType.typeID) ? x.dataType
-				: y.dataType;
+		DataType dataType = (x.dataType.typeID > y.dataType.typeID) ? x.dataType : y.dataType;
 		if (x.dataType == DataType.Byte || x.dataType == DataType.Short)
 			if (y.dataType == DataType.Byte || y.dataType == DataType.Short)
 				dataType = DataType.Integer;
-		if (x.dataType == DataType.BigInteger
-				|| y.dataType == DataType.BigInteger)
-			if (x.dataType == DataType.Float || y.dataType == DataType.Float
-					|| x.dataType == DataType.Double
+		if (x.dataType == DataType.BigInteger || y.dataType == DataType.BigInteger)
+			if (x.dataType == DataType.Float || y.dataType == DataType.Float || x.dataType == DataType.Double
 					|| y.dataType == DataType.Double)
 				dataType = DataType.BigDecimal;
 		try {
@@ -730,111 +640,79 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Construit une nouvelle instance d'une matrice aux dimensions
-	 * {@code width} et {@code height} et les autre membres seront determines a
-	 * partir {@code dataType}.
+	 * Construit une nouvelle instance d'une matrice aux dimensions {@code width} et
+	 * {@code height} et les autre membres seront determines a partir
+	 * {@code dataType}.
 	 *
-	 * @param width
-	 *            le nombre de ligne
-	 * @param height
-	 *            le nombre de colonne
-	 * @param dataType
-	 *            le type des elements de la nouvelle matrice
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue, si {@code false} alors l'espace reserve aux elements
-	 *            ne sera pas alloue
-	 * @param value
-	 *            une valeur qui sera affectee a tous les elements de la
-	 *            nouvelle matrice, si alloc est {@code true}
-	 * @param random
-	 *            des valeurs aleatoires seront affectes a tous les elements de
-	 *            la nouvelle matrice, si alloc est {@code true} et si
-	 *            {@code value} est {@code null}
-	 * @param conf
-	 *            une configuration de Apache Hadoop
-	 * @param f
-	 *            un nom de fichier ou ecrire tous les elements d'une matrice
+	 * @param width    le nombre de ligne
+	 * @param height   le nombre de colonne
+	 * @param dataType le type des elements de la nouvelle matrice
+	 * @param alloc    si {@code true} alors l'espace reserve aux elements sera
+	 *                 alloue, si {@code false} alors l'espace reserve aux elements
+	 *                 ne sera pas alloue
+	 * @param value    une valeur qui sera affectee a tous les elements de la
+	 *                 nouvelle matrice, si alloc est {@code true}
+	 * @param random   des valeurs aleatoires seront affectes a tous les elements de
+	 *                 la nouvelle matrice, si alloc est {@code true} et si
+	 *                 {@code value} est {@code null}
+	 * @param conf     une configuration de Apache Hadoop
+	 * @param f        un nom de fichier ou ecrire tous les elements d'une matrice
 	 * @return la nouvelle matrice
-	 * @throws NumberFormatException
-	 *             Cette exception est levee si {@code value} en peut etre
-	 *             converti dans le type {@code dataType}
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @throws NumberFormatException Cette exception est levee si {@code value} en
+	 *                               peut etre converti dans le type
+	 *                               {@code dataType}
+	 * @throws IOException           une exception I/O a ete relevee
 	 */
-	public static Matrix<? extends Number> builder(final int width,
-			final int height, final DataType dataType, final boolean alloc,
-			final String value, final boolean random, final Configuration conf,
-			final Path f) throws NumberFormatException, IOException {
+	public static Matrix<? extends Number> builder(final int width, final int height, final DataType dataType,
+			final boolean alloc, final String value, final boolean random, final Configuration conf, final Path f)
+			throws NumberFormatException, IOException {
 		Matrix<? extends Number> x = null;
 		switch (dataType) {
 		case Byte:
-			x = new Matrix<Byte>(width, height, DataType.Byte, (byte) 0, alloc,
-					value, random, conf, f,
-					(final Integer n, final Integer m) -> new Byte[n][m], (
-							DataInput in) -> in.readByte(), (DataOutput out,
-							final Byte a) -> out.writeByte(a), (DataInput in,
-							final Integer toSkip) -> in.skipBytes(toSkip
-							* Byte.BYTES), (Random r) -> new Integer(
-							r.nextInt()).byteValue(),
-					(final String s) -> new Byte(s));
+			x = new Matrix<Byte>(width, height, DataType.Byte, (byte) 0, alloc, value, random, conf, f,
+					(final Integer n, final Integer m) -> new Byte[n][m], (DataInput in) -> in.readByte(),
+					(DataOutput out, final Byte a) -> out.writeByte(a),
+					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip * Byte.BYTES),
+					(Random r) -> new Integer(r.nextInt()).byteValue(), (final String s) -> new Byte(s));
 			break;
 		case Short:
-			x = new Matrix<Short>(width, height, DataType.Short, (short) 0,
-					alloc, value, random, conf, f, (final Integer n,
-							final Integer m) -> new Short[n][m],
-					(DataInput in) -> in.readShort(), (DataOutput out,
-							final Short a) -> out.writeShort(a), (DataInput in,
-							final Integer toSkip) -> in.skipBytes(toSkip
-							* Short.BYTES), (Random r) -> new Integer(
-							r.nextInt()).shortValue(),
-					(final String s) -> new Short(s));
+			x = new Matrix<Short>(width, height, DataType.Short, (short) 0, alloc, value, random, conf, f,
+					(final Integer n, final Integer m) -> new Short[n][m], (DataInput in) -> in.readShort(),
+					(DataOutput out, final Short a) -> out.writeShort(a),
+					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip * Short.BYTES),
+					(Random r) -> new Integer(r.nextInt()).shortValue(), (final String s) -> new Short(s));
 			break;
 		case Integer:
-			x = new Matrix<Integer>(width, height, DataType.Integer, 0, alloc,
-					value, random, conf, f,
-					(final Integer n, final Integer m) -> new Integer[n][m], (
-							DataInput in) -> in.readInt(), (DataOutput out,
-							final Integer a) -> out.writeInt(a), (DataInput in,
-							final Integer toSkip) -> in.skipBytes(toSkip
-							* Integer.BYTES), (Random r) -> r.nextInt(), (
-							final String s) -> new Integer(s));
+			x = new Matrix<Integer>(width, height, DataType.Integer, 0, alloc, value, random, conf, f,
+					(final Integer n, final Integer m) -> new Integer[n][m], (DataInput in) -> in.readInt(),
+					(DataOutput out, final Integer a) -> out.writeInt(a),
+					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip * Integer.BYTES),
+					(Random r) -> r.nextInt(), (final String s) -> new Integer(s));
 			break;
 		case Long:
-			x = new Matrix<Long>(width, height, DataType.Long, 0l, alloc,
-					value, random, conf, f,
-					(final Integer n, final Integer m) -> new Long[n][m], (
-							DataInput in) -> in.readLong(), (DataOutput out,
-							final Long a) -> out.writeLong(a), (DataInput in,
-							final Integer toSkip) -> in.skipBytes(toSkip
-							* Long.BYTES), (Random r) -> r.nextLong(), (
-							final String s) -> new Long(s));
+			x = new Matrix<Long>(width, height, DataType.Long, 0l, alloc, value, random, conf, f,
+					(final Integer n, final Integer m) -> new Long[n][m], (DataInput in) -> in.readLong(),
+					(DataOutput out, final Long a) -> out.writeLong(a),
+					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip * Long.BYTES),
+					(Random r) -> r.nextLong(), (final String s) -> new Long(s));
 			break;
 		case Float:
-			x = new Matrix<Float>(width, height, DataType.Float, 0f, alloc,
-					value, random, conf, f,
-					(final Integer n, final Integer m) -> new Float[n][m], (
-							DataInput in) -> in.readFloat(), (DataOutput out,
-							final Float a) -> out.writeFloat(a), (DataInput in,
-							final Integer toSkip) -> in.skipBytes(toSkip
-							* Float.BYTES), (Random r) -> r.nextFloat(), (
-							final String s) -> new Float(s));
+			x = new Matrix<Float>(width, height, DataType.Float, 0f, alloc, value, random, conf, f,
+					(final Integer n, final Integer m) -> new Float[n][m], (DataInput in) -> in.readFloat(),
+					(DataOutput out, final Float a) -> out.writeFloat(a),
+					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip * Float.BYTES),
+					(Random r) -> r.nextFloat(), (final String s) -> new Float(s));
 			break;
 		case Double:
-			x = new Matrix<Double>(width, height, DataType.Double, 0d, alloc,
-					value, random, conf, f,
-					(final Integer n, final Integer m) -> new Double[n][m], (
-							DataInput in) -> in.readDouble(), (DataOutput out,
-							final Double a) -> out.writeDouble(a),
-					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip
-							* Double.BYTES), (Random r) -> r.nextDouble(), (
-							final String s) -> new Double(s));
+			x = new Matrix<Double>(width, height, DataType.Double, 0d, alloc, value, random, conf, f,
+					(final Integer n, final Integer m) -> new Double[n][m], (DataInput in) -> in.readDouble(),
+					(DataOutput out, final Double a) -> out.writeDouble(a),
+					(DataInput in, final Integer toSkip) -> in.skipBytes(toSkip * Double.BYTES),
+					(Random r) -> r.nextDouble(), (final String s) -> new Double(s));
 			break;
 		case BigInteger:
-			x = new Matrix<BigInteger>(width, height, DataType.BigInteger,
-					BigInteger.ZERO, alloc, value, random, conf, f,
-					(final Integer n, final Integer m) -> new BigInteger[n][m],
-					(DataInput in) -> {
+			x = new Matrix<BigInteger>(width, height, DataType.BigInteger, BigInteger.ZERO, alloc, value, random, conf,
+					f, (final Integer n, final Integer m) -> new BigInteger[n][m], (DataInput in) -> {
 						byte[] a = new byte[in.readInt()];
 						in.readFully(a);
 						return new BigInteger(a);
@@ -845,14 +723,11 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 					}, (DataInput in, final Integer toSkip) -> {
 						for (int i = 0; i < toSkip; i++)
 							in.skipBytes(in.readInt());
-					}, (Random r) -> new BigInteger(64, r),
-					(final String s) -> new BigInteger(s));
+					}, (Random r) -> new BigInteger(64, r), (final String s) -> new BigInteger(s));
 			break;
 		case BigDecimal:
-			x = new Matrix<BigDecimal>(width, height, DataType.BigDecimal,
-					BigDecimal.ZERO, alloc, value, random, conf, f,
-					(final Integer n, final Integer m) -> new BigDecimal[n][m],
-					(DataInput in) -> {
+			x = new Matrix<BigDecimal>(width, height, DataType.BigDecimal, BigDecimal.ZERO, alloc, value, random, conf,
+					f, (final Integer n, final Integer m) -> new BigDecimal[n][m], (DataInput in) -> {
 						byte[] a = new byte[in.readInt()];
 						in.readFully(a);
 						return new BigDecimal(new BigInteger(a), in.readInt());
@@ -864,8 +739,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 					}, (DataInput in, final Integer toSkip) -> {
 						for (int i = 0; i < toSkip; i++)
 							in.skipBytes(in.readInt() + Integer.BYTES);
-					}, (Random r) -> new BigDecimal(r.nextDouble()), (
-							final String s) -> new BigDecimal(s));
+					}, (Random r) -> new BigDecimal(r.nextDouble()), (final String s) -> new BigDecimal(s));
 			break;
 		}
 		return x;
@@ -873,16 +747,16 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 
 	/**
 	 * Partitionne une matrice en {@code nb*mb} partitions ou {@code nb} est le
-	 * nombre de partition sur les lignes et {@code mb} le nombre de partition
-	 * sur les colonnes.
+	 * nombre de partition sur les lignes et {@code mb} le nombre de partition sur
+	 * les colonnes.
 	 * <p>
 	 * Chaque partition resultante correspond a une clef constituee d'un couple
 	 * d'entier {@code (i,j)}, represente par la classe {@link BlockKey}, qui
 	 * indique la position de la partition dans la matrice partitionnee:
 	 * <ul>
-	 * <li>Les partitions resultantes avec {@code 0<=i<nb-1} et
-	 * {@code 0<=j<mb-1} sont des matrices de dimensions, entieres, de
-	 * {@code n/nb} lignes et {@code m/mb} colonnes.
+	 * <li>Les partitions resultantes avec {@code 0<=i<nb-1} et {@code 0<=j<mb-1}
+	 * sont des matrices de dimensions, entieres, de {@code n/nb} lignes et
+	 * {@code m/mb} colonnes.
 	 * <li>Les partitions d'indices {@code i=nb-1} et {@code 0<=j<mb-1} sont de
 	 * dimensions {@code n-(nb-1)*n/nb} lignes et {@code m/mb} colonnes.
 	 * <li>Les partitions d'indice {@code 0<=i<nb-1} et {@code j=mb-1} sont de
@@ -891,26 +765,20 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	 * {@code n-(nb-1)*n/nb} lignes et {@code m-(mb-1)*m/mb} colonnes.
 	 * </ul>
 	 * Une partition est representee par la classe {@link Matrice} ou tous les
-	 * membres sont renseignes sauf l'espace de stockage des elements: une
-	 * partition est un squelette de matrice.
+	 * membres sont renseignes sauf l'espace de stockage des elements: une partition
+	 * est un squelette de matrice.
 	 * 
-	 * @param <T>
-	 *            le type des elements d'une matrice
-	 * @param x
-	 *            une matrice
-	 * @param nb
-	 *            le nombre de partition sur les lignes
-	 * @param mb
-	 *            le nombre de partition sur les colonnes
-	 * @return une map contenant les partitions desirees d'une matrice. Un
-	 *         element de la map est constitue d'une d'un couple d'entier
-	 *         {@code (i,j)}, une clef, representee par la classe
-	 *         {@link BlockKey}, et d'un squelette de matrice, la valeur
-	 *         correspondante, une partition, representee par la classe
-	 *         {@link Matrice}
+	 * @param <T> le type des elements d'une matrice
+	 * @param x   une matrice
+	 * @param nb  le nombre de partition sur les lignes
+	 * @param mb  le nombre de partition sur les colonnes
+	 * @return une map contenant les partitions desirees d'une matrice. Un element
+	 *         de la map est constitue d'une d'un couple d'entier {@code (i,j)}, une
+	 *         clef, representee par la classe {@link BlockKey}, et d'un squelette
+	 *         de matrice, la valeur correspondante, une partition, representee par
+	 *         la classe {@link Matrice}
 	 */
-	public static <T extends Number> Map<BlockKey, Matrix<T>> toBlocks(
-			final Matrix<T> x, final int nb, final int mb) {
+	public static <T extends Number> Map<BlockKey, Matrix<T>> toBlocks(final Matrix<T> x, final int nb, final int mb) {
 		Map<BlockKey, Matrix<T>> r = new ConcurrentHashMap<BlockKey, Matrix<T>>();
 		int n1 = Math.floorDiv(x.n, nb), n2, m1 = Math.floorDiv(x.m, mb), m2;
 		for (int i = 0; i < nb; i++) {
@@ -926,26 +794,19 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Fournit une copie d'une partie d'une matrice.
 	 *
-	 * @param <T>
-	 *            le type des elements d'une matrice
-	 * @param x
-	 *            la matrice ou copier
-	 * @param i
-	 *            la ligne ou commencer la copie
-	 * @param j
-	 *            la colonne ou commencer la copie
-	 * @param n
-	 *            le nombre de ligne a copier
-	 * @param m
-	 *            le nombre de colonne a copier
+	 * @param <T> le type des elements d'une matrice
+	 * @param x   la matrice ou copier
+	 * @param i   la ligne ou commencer la copie
+	 * @param j   la colonne ou commencer la copie
+	 * @param n   le nombre de ligne a copier
+	 * @param m   le nombre de colonne a copier
 	 * @return une copie d'une partie d'une matrice
-	 * @throws MatrixBoundCopyException
-	 *             cette exception est levee si {@code (i + n > x.getHeight())}
-	 *             ou {@code (j + m > x.getWidth())}
+	 * @throws MatrixBoundCopyException cette exception est levee si
+	 *                                  {@code (i + n > x.getHeight())} ou
+	 *                                  {@code (j + m > x.getWidth())}
 	 */
-	public static <T extends Number> Matrix<T> copy(final Matrix<T> x,
-			final int i, final int j, final int n, final int m)
-			throws MatrixBoundCopyException {
+	public static <T extends Number> Matrix<T> copy(final Matrix<T> x, final int i, final int j, final int n,
+			final int m) throws MatrixBoundCopyException {
 		if ((i + n > x.n) || (j + m > x.m))
 			throw new MatrixBoundCopyException();
 		Matrix<T> r = new Matrix<T>(n, m, x, true);
@@ -957,48 +818,34 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Copie une partie d'une matrice vers une autre.
 	 *
-	 * @param <T>
-	 *            le type des elements de la matrice source
-	 * @param <U>
-	 *            le type des elements de la matrice destination
-	 * @param dest
-	 *            la matrice destination
-	 * @param src
-	 *            la matrice source
-	 * @param srci
-	 *            la ligne de la matrice source ou commencer la copie
-	 * @param srcj
-	 *            la colonne de la matrice source ou commencer la copie
-	 * @param desti
-	 *            la ligne de la matrice destination ou commencer la copie
-	 * @param destj
-	 *            la colonne de la matrice destination ou commencer la copie
-	 * @param n
-	 *            le nombre de ligne a copier
-	 * @param m
-	 *            le nombre de colonne a copier
-	 * @param copyDataFunction
-	 *            la fonction de copie permettant de transformer un element de
-	 *            type T en un element de type U
-	 * @throws MatrixBoundCopyException
-	 *             Cette exception est levee si
-	 *             {@code (srci + n > src.getHeight())} ou
-	 *             {@code (srcj + m > src.getWidth())} ou
-	 *             {@code (desti + n > dest.getHeight())} ou
-	 *             {@code (destj + m > dest.getWidth())}
+	 * @param <T>              le type des elements de la matrice source
+	 * @param <U>              le type des elements de la matrice destination
+	 * @param dest             la matrice destination
+	 * @param src              la matrice source
+	 * @param srci             la ligne de la matrice source ou commencer la copie
+	 * @param srcj             la colonne de la matrice source ou commencer la copie
+	 * @param desti            la ligne de la matrice destination ou commencer la
+	 *                         copie
+	 * @param destj            la colonne de la matrice destination ou commencer la
+	 *                         copie
+	 * @param n                le nombre de ligne a copier
+	 * @param m                le nombre de colonne a copier
+	 * @param copyDataFunction la fonction de copie permettant de transformer un
+	 *                         element de type T en un element de type U
+	 * @throws MatrixBoundCopyException Cette exception est levee si
+	 *                                  {@code (srci + n > src.getHeight())} ou
+	 *                                  {@code (srcj + m > src.getWidth())} ou
+	 *                                  {@code (desti + n > dest.getHeight())} ou
+	 *                                  {@code (destj + m > dest.getWidth())}
 	 */
-	public static <T extends Number, U extends Number> void copy(
-			Matrix<U> dest, final Matrix<T> src, final int srci,
-			final int srcj, final int desti, final int destj, final int n,
-			final int m, final Function<T, U> copyDataFunction)
-			throws MatrixBoundCopyException {
-		if ((srci + n > src.n) || (srcj + m > src.m) || (desti + n > dest.n)
-				|| (destj + m > dest.m))
+	public static <T extends Number, U extends Number> void copy(Matrix<U> dest, final Matrix<T> src, final int srci,
+			final int srcj, final int desti, final int destj, final int n, final int m,
+			final Function<T, U> copyDataFunction) throws MatrixBoundCopyException {
+		if ((srci + n > src.n) || (srcj + m > src.m) || (desti + n > dest.n) || (destj + m > dest.m))
 			throw new MatrixBoundCopyException();
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++)
-				dest.data[desti + i][destj + j] = copyDataFunction
-						.apply(src.data[srci + i][srcj + j]);
+				dest.data[desti + i][destj + j] = copyDataFunction.apply(src.data[srci + i][srcj + j]);
 	}
 
 	/** {@inheritDoc} */
@@ -1030,8 +877,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		String r = String.format("n=[%d],m=[%d],dataType=[%s],data=[\n", n, m,
-				dataType.getDescriptionID());
+		String r = String.format("n=[%d],m=[%d],dataType=[%s],data=[\n", n, m, dataType.getDescriptionID());
 		for (T[] i : data)
 			r += Arrays.toString(i) + "\n";
 		return r.replaceFirst("\n$", "]");
@@ -1048,58 +894,45 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	 * Lit une matrice a partir d'un flux. Tous les membres d'une matrice seront
 	 * initialises, sauf les elements qui sont optionnels.
 	 *
-	 * @param in
-	 *            le flux ou lire
-	 * @param alloc
-	 *            si {@code true} alors l'espace reserve aux elements sera
-	 *            alloue et les elements de la matrice seront lus, si
-	 *            {@code false} alors l'espace reserve aux elements ne sera pas
-	 *            alloue et les elments de la matrice ne seront pas lus
+	 * @param in    le flux ou lire
+	 * @param alloc si {@code true} alors l'espace reserve aux elements sera alloue
+	 *              et les elements de la matrice seront lus, si {@code false} alors
+	 *              l'espace reserve aux elements ne sera pas alloue et les elments
+	 *              de la matrice ne seront pas lus
 	 * @return la matrice lue
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	public static Matrix<? extends Number> read(DataInput in,
-			final boolean alloc) throws IOException {
+	public static Matrix<? extends Number> read(DataInput in, final boolean alloc) throws IOException {
 		int n = in.readInt(), m = in.readInt();
 		DataType dataType = DataTypeID.get(in.readInt());
-		Matrix<? extends Number> x = builder(n, m, dataType, alloc, null,
-				false, null, null);
+		Matrix<? extends Number> x = builder(n, m, dataType, alloc, null, false, null, null);
 		if (alloc)
 			readData(in, x);
 		return x;
 	}
 
 	/**
-	 * Lit l'entete d'une matrice a partir d'un flux. Tous les membres d'ume
-	 * matrice seront initialises, sauf les elements.
+	 * Lit l'entete d'une matrice a partir d'un flux. Tous les membres d'ume matrice
+	 * seront initialises, sauf les elements.
 	 *
-	 * @param in
-	 *            le flux ou lire
+	 * @param in le flux ou lire
 	 * @return une matrice ne contenant pas d'element
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	public static Matrix<? extends Number> readHeader(DataInput in)
-			throws IOException {
+	public static Matrix<? extends Number> readHeader(DataInput in) throws IOException {
 		return read(in, false);
 	}
 
 	/**
 	 * lit tous les elements d'une matrice.
 	 *
-	 * @param <T>
-	 *            le type des elements de la matrice à lire
-	 * @param in
-	 *            le flux ou lire
-	 * @param x
-	 *            la matrice ou les elements lu seront stockes. Il est suppose
-	 *            que les membres, a part les elements, sont renseignes.
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param <T> le type des elements de la matrice à lire
+	 * @param in  le flux ou lire
+	 * @param x   la matrice ou les elements lu seront stockes. Il est suppose que
+	 *            les membres, a part les elements, sont renseignes.
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	public static <T extends Number> void readData(DataInput in, Matrix<T> x)
-			throws IOException {
+	public static <T extends Number> void readData(DataInput in, Matrix<T> x) throws IOException {
 		for (int i = 0; i < x.n; i++)
 			for (int j = 0; j < x.m; j++)
 				x.data[i][j] = x.readDataFunction.apply(in);
@@ -1108,31 +941,22 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Lit, a partir d'un flux, une partie d'element d'une matrice.
 	 *
-	 * @param <T>
-	 *            le type des elements de la matrice a lire
-	 * @param in
-	 *            le flux ou lire
-	 * @param x
-	 *            une matrice correspondant aux donnees stockees dans le flux.
-	 *            La matrice peut etre vide d'element.
-	 * @param i0
-	 *            la ligne ou commencer la lecture
-	 * @param j0
-	 *            la colonne ou commencer la lecture
-	 * @param n
-	 *            le nombre de ligne a lire
-	 * @param m
-	 *            le nombre de colonne a lire
+	 * @param <T> le type des elements de la matrice a lire
+	 * @param in  le flux ou lire
+	 * @param x   une matrice correspondant aux donnees stockees dans le flux. La
+	 *            matrice peut etre vide d'element.
+	 * @param i0  la ligne ou commencer la lecture
+	 * @param j0  la colonne ou commencer la lecture
+	 * @param n   le nombre de ligne a lire
+	 * @param m   le nombre de colonne a lire
 	 * @return la matrice contenant les elements lus
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
-	 * @throws MatrixBoundReadException
-	 *             cette exception est levee si {@code (i0 + n > x.getHeight())}
-	 *             ou {@code (j0 + m > x.getWidth())}
+	 * @throws IOException              une exception I/O a ete relevee
+	 * @throws MatrixBoundReadException cette exception est levee si
+	 *                                  {@code (i0 + n > x.getHeight())} ou
+	 *                                  {@code (j0 + m > x.getWidth())}
 	 */
-	public static <T extends Number> Matrix<T> readData(DataInput in,
-			final Matrix<T> x, final int i0, final int j0, final int n,
-			final int m) throws IOException, MatrixBoundReadException {
+	public static <T extends Number> Matrix<T> readData(DataInput in, final Matrix<T> x, final int i0, final int j0,
+			final int n, final int m) throws IOException, MatrixBoundReadException {
 		if ((i0 + n > x.n) || (j0 + m > x.m))
 			throw new MatrixBoundReadException();
 		Matrix<T> r = new Matrix<T>(n, m, x, true);
@@ -1147,17 +971,12 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Ecrit l'entete d'une matrice dans un flux.
 	 *
-	 * @param <T>
-	 *            le type des elements de la matrice a ecrire
-	 * @param out
-	 *            le flux ou ecrire
-	 * @param x
-	 *            la matrice contenant l'entete a ecrire
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param <T> le type des elements de la matrice a ecrire
+	 * @param out le flux ou ecrire
+	 * @param x   la matrice contenant l'entete a ecrire
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	public static <T extends Number> void writeHeader(DataOutput out,
-			final Matrix<T> x) throws IOException {
+	public static <T extends Number> void writeHeader(DataOutput out, final Matrix<T> x) throws IOException {
 		out.writeInt(x.n);
 		out.writeInt(x.m);
 		out.writeInt(x.dataType.typeID);
@@ -1166,17 +985,12 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Ecrit tous les elements d'une matrice dans un flux.
 	 *
-	 * @param <T>
-	 *            le type des elements de la matrice a ecrire
-	 * @param out
-	 *            le flux ou ecrire
-	 * @param x
-	 *            la matrice contenant les elements a ecrire
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param <T> le type des elements de la matrice a ecrire
+	 * @param out le flux ou ecrire
+	 * @param x   la matrice contenant les elements a ecrire
+	 * @throws IOException une exception I/O a ete relevee
 	 */
-	public static <T extends Number> void writeData(DataOutput out,
-			final Matrix<T> x) throws IOException {
+	public static <T extends Number> void writeData(DataOutput out, final Matrix<T> x) throws IOException {
 		for (int i = 0; i < x.n; i++)
 			for (int j = 0; j < x.m; j++)
 				x.writeDataFunction.apply(out, x.data[i][j]);
@@ -1185,33 +999,22 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Ecrit, dans un flux, une partie des elements d'une matrice.
 	 *
-	 * @param <T>
-	 *            le type des elements de la matrice a ecrire
-	 * @param out
-	 *            le flux ou ecrire
-	 * @param x
-	 *            la matrice contenant les elements a ecrire
-	 * @param i0
-	 *            la ligne ou commencer a ecrire
-	 * @param j0
-	 *            la colonne ou commencer a ecrire
-	 * @param n
-	 *            le nombre de ligne a ecrire
-	 * @param m
-	 *            le nombre de colonne a ecrire
-	 * @param header
-	 *            si {@code true} alors l'entete de la matrice sera ecrit, si
-	 *            {@code false} alors l'entete ne sera pas ecrit
-	 * @throws MatrixBoundWriteException
-	 *             cette exception est levee si {@code (i0 + n > x.getHeight())}
-	 *             ou {@code (j0 + m > x.getWidth())}
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
+	 * @param <T>    le type des elements de la matrice a ecrire
+	 * @param out    le flux ou ecrire
+	 * @param x      la matrice contenant les elements a ecrire
+	 * @param i0     la ligne ou commencer a ecrire
+	 * @param j0     la colonne ou commencer a ecrire
+	 * @param n      le nombre de ligne a ecrire
+	 * @param m      le nombre de colonne a ecrire
+	 * @param header si {@code true} alors l'entete de la matrice sera ecrit, si
+	 *               {@code false} alors l'entete ne sera pas ecrit
+	 * @throws MatrixBoundWriteException cette exception est levee si
+	 *                                   {@code (i0 + n > x.getHeight())} ou
+	 *                                   {@code (j0 + m > x.getWidth())}
+	 * @throws IOException               une exception I/O a ete relevee
 	 */
-	public static <T extends Number> void writeData(DataOutput out,
-			final Matrix<T> x, final int i0, final int j0, final int n,
-			final int m, final boolean header) throws IOException,
-			MatrixBoundWriteException {
+	public static <T extends Number> void writeData(DataOutput out, final Matrix<T> x, final int i0, final int j0,
+			final int n, final int m, final boolean header) throws IOException, MatrixBoundWriteException {
 		if ((i0 + n > x.n) || (j0 + m > x.m))
 			throw new MatrixBoundWriteException();
 		if (header) {
@@ -1232,38 +1035,32 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Donne la somme de deux matrices. Les termes de la somme peuvent ne pas
-	 * etre de memes dimensions, la somme suppose alors que les elements absents
-	 * de la matrice la plus petite est zero.
+	 * Donne la somme de deux matrices. Les termes de la somme peuvent ne pas etre
+	 * de memes dimensions, la somme suppose alors que les elements absents de la
+	 * matrice la plus petite est zero.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param <R>
-	 *            le type des elements de la matrice resultante
-	 * @param x
-	 *            un des termes de la somme
-	 * @param y
-	 *            un des termes de la somme
-	 * @param sumDataFunction
-	 *            la fonction permettant de sommer un element de type {@code T}
-	 *            avec un element de type {@code U} et de retourner une element
-	 *            de type {@code R}
-	 * @param virtual
-	 *            si {@code true} alors il est possible de sommer des matrices
-	 *            de dimensions differentes, si {@code false} alors si les
-	 *            dimensions des matrices different une exception de type
-	 *            MatrixBoundAdditionException est levee
+	 * @param <T>             le type des elements d'un des termes
+	 * @param <U>             le type des elements d'un des termes
+	 * @param <R>             le type des elements de la matrice resultante
+	 * @param x               un des termes de la somme
+	 * @param y               un des termes de la somme
+	 * @param sumDataFunction la fonction permettant de sommer un element de type
+	 *                        {@code T} avec un element de type {@code U} et de
+	 *                        retourner une element de type {@code R}
+	 * @param virtual         si {@code true} alors il est possible de sommer des
+	 *                        matrices de dimensions differentes, si {@code false}
+	 *                        alors si les dimensions des matrices different une
+	 *                        exception de type MatrixBoundAdditionException est
+	 *                        levee
 	 * @return une matrice resultant de la somme de deux matrices
-	 * @throws MatrixBoundAdditionException
-	 *             si le parametre {@code virtual} est {@code false} alors si
-	 *             les dimensions des matrices different une exception de type
-	 *             MatrixBoundAdditionException est levee
+	 * @throws MatrixBoundAdditionException si le parametre {@code virtual} est
+	 *                                      {@code false} alors si les dimensions
+	 *                                      des matrices different une exception de
+	 *                                      type MatrixBoundAdditionException est
+	 *                                      levee
 	 */
-	public static <T extends Number, U extends Number, R extends Number> Matrix<R> sum(
-			final Matrix<T> x, final Matrix<U> y,
-			final BiFunction<T, U, R> sumDataFunction, final boolean virtual)
+	public static <T extends Number, U extends Number, R extends Number> Matrix<R> sum(final Matrix<T> x,
+			final Matrix<U> y, final BiFunction<T, U, R> sumDataFunction, final boolean virtual)
 			throws MatrixBoundAdditionException {
 		int n = x.n, m = x.m;
 		if (virtual == true) {
@@ -1275,41 +1072,36 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		Matrix<R> r = (Matrix<R>) builder(n, m, x, y, true);
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++)
-				r.data[i][j] = sumDataFunction.apply(
-						(i < x.n && j < x.m) ? x.data[i][j] : x.ZERO,
+				r.data[i][j] = sumDataFunction.apply((i < x.n && j < x.m) ? x.data[i][j] : x.ZERO,
 						(i < y.n && j < y.m) ? y.data[i][j] : y.ZERO);
 		return r;
 	}
 
 	/**
-	 * Additionne une matrice y dans une matrice x. Les elements des deux
-	 * matrices sont supposes etre de meme type. Les termes de l'addition
-	 * peuvent ne pas etre de memes dimensions, l'addition suppose alors que les
-	 * elements absents de la matrice la plus petite est zero.
+	 * Additionne une matrice y dans une matrice x. Les elements des deux matrices
+	 * sont supposes etre de meme type. Les termes de l'addition peuvent ne pas etre
+	 * de memes dimensions, l'addition suppose alors que les elements absents de la
+	 * matrice la plus petite est zero.
 	 *
-	 * @param <T>
-	 *            le type des elements des matrices
-	 * @param x
-	 *            Une matrice ou sera ecrit les resultats de l'addition
-	 * @param y
-	 *            Une matrice
-	 * @param sumDataFunction
-	 *            la fonction permettant d'additionner un element de type
-	 *            {@code T} avec un element de type {@code T} et de retourner
-	 *            une element de type {@code T}
-	 * @param virtual
-	 *            si {@code true} alors il est possible d'additionner des
-	 *            matrices de dimensions differentes, si {@code false} alors si
-	 *            les dimensions des matrices different une exception de type
-	 *            MatrixBoundAdditionException est levee
-	 * @throws MatrixBoundAdditionException
-	 *             si le parametre {@code virtual} est {@code false} alors si
-	 *             les dimensions des matrices different une exception de type
-	 *             MatrixBoundAdditionException est levee
+	 * @param <T>             le type des elements des matrices
+	 * @param x               Une matrice ou sera ecrit les resultats de l'addition
+	 * @param y               Une matrice
+	 * @param sumDataFunction la fonction permettant d'additionner un element de
+	 *                        type {@code T} avec un element de type {@code T} et de
+	 *                        retourner une element de type {@code T}
+	 * @param virtual         si {@code true} alors il est possible d'additionner
+	 *                        des matrices de dimensions differentes, si
+	 *                        {@code false} alors si les dimensions des matrices
+	 *                        different une exception de type
+	 *                        MatrixBoundAdditionException est levee
+	 * @throws MatrixBoundAdditionException si le parametre {@code virtual} est
+	 *                                      {@code false} alors si les dimensions
+	 *                                      des matrices different une exception de
+	 *                                      type MatrixBoundAdditionException est
+	 *                                      levee
 	 */
-	public static <T extends Number> void add(Matrix<T> x, final Matrix<T> y,
-			BiFunction<T, T, T> sumDataFunction, boolean virtual)
-			throws MatrixBoundAdditionException {
+	public static <T extends Number> void add(Matrix<T> x, final Matrix<T> y, BiFunction<T, T, T> sumDataFunction,
+			boolean virtual) throws MatrixBoundAdditionException {
 		int n = x.n, m = x.m;
 		if (virtual == true) {
 			n = Math.min(n, y.n);
@@ -1318,42 +1110,33 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			throw new MatrixBoundAdditionException();
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++)
-				x.data[i][j] = sumDataFunction
-						.apply(x.data[i][j], y.data[i][j]);
+				x.data[i][j] = sumDataFunction.apply(x.data[i][j], y.data[i][j]);
 	}
 
 	/**
 	 * Multiplication, sequentielle, de deux matrices. Les termes de la
 	 * multiplication et son resultat sont integralement charges en memoire.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param <R>
-	 *            le type des elements de la matrice resultante
-	 * @param x
-	 *            un des termes de la multiplication
-	 * @param y
-	 *            un des termes de la multiplication
-	 * @param sumDataFunction
-	 *            la fonction permettant d'additionner un element de type
-	 *            {@code R} avec un element de type {@code R} et de retourner
-	 *            une element de type {@code R}
-	 * @param multiplyDataFunction
-	 *            la fonction permettant de multiplier un element de type
-	 *            {@code T} avec un element de type {@code U} et de retourner
-	 *            une element de type {@code R}
+	 * @param <T>                  le type des elements d'un des termes
+	 * @param <U>                  le type des elements d'un des termes
+	 * @param <R>                  le type des elements de la matrice resultante
+	 * @param x                    un des termes de la multiplication
+	 * @param y                    un des termes de la multiplication
+	 * @param sumDataFunction      la fonction permettant d'additionner un element
+	 *                             de type {@code R} avec un element de type
+	 *                             {@code R} et de retourner une element de type
+	 *                             {@code R}
+	 * @param multiplyDataFunction la fonction permettant de multiplier un element
+	 *                             de type {@code T} avec un element de type
+	 *                             {@code U} et de retourner une element de type
+	 *                             {@code R}
 	 * @return une matrice resultante d'une multiplication
-	 * @throws MatrixBoundMultiplicationException
-	 *             cette exception est levee si
-	 *             {@code x.getWidth()!=y.getHeight()}
+	 * @throws MatrixBoundMultiplicationException cette exception est levee si
+	 *                                            {@code x.getWidth()!=y.getHeight()}
 	 */
-	public static <T extends Number, U extends Number, R extends Number> Matrix<R> multiply(
-			final Matrix<T> x, final Matrix<U> y,
-			final BiFunction<R, R, R> sumDataFunction,
-			final BiFunction<T, U, R> multiplyDataFunction)
-			throws MatrixBoundMultiplicationException {
+	public static <T extends Number, U extends Number, R extends Number> Matrix<R> multiply(final Matrix<T> x,
+			final Matrix<U> y, final BiFunction<R, R, R> sumDataFunction,
+			final BiFunction<T, U, R> multiplyDataFunction) throws MatrixBoundMultiplicationException {
 		if (x.m != y.n)
 			throw new MatrixBoundMultiplicationException();
 		// Creation de la matrice resultante
@@ -1367,25 +1150,21 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 				// Boucle sur les elements des matrices des
 				// termes de la multiplication
 				for (int k = 1; k < x.m; k++)
-					a = sumDataFunction.apply(a, multiplyDataFunction.apply(
-							x.data[i][k], y.data[k][j]));
+					a = sumDataFunction.apply(a, multiplyDataFunction.apply(x.data[i][k], y.data[k][j]));
 				r.data[i][j] = a;
 			}
 		return r;
 	}
 
 	/**
-	 * Classe soutraitant la multiplication parallele, par multithreading, de
-	 * deux matrices. Une instance de la classe est associee a un thread
-	 * executant une partie d'une multiplication de deux matrices. Les termes de
-	 * la multiplication et son resultat sont integralement charges en memoire.
+	 * Classe soutraitant la multiplication parallele, par multithreading, de deux
+	 * matrices. Une instance de la classe est associee a un thread executant une
+	 * partie d'une multiplication de deux matrices. Les termes de la multiplication
+	 * et son resultat sont integralement charges en memoire.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param <R>
-	 *            le type des elements de la matrice resultante
+	 * @param <T> le type des elements d'un des termes
+	 * @param <U> le type des elements d'un des termes
+	 * @param <R> le type des elements de la matrice resultante
 	 */
 	private static class ConcurrentMultiplication<T extends Number, U extends Number, R extends Number>
 			implements Runnable {
@@ -1400,39 +1179,34 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		private Matrix<R> r;
 
 		/**
-		 * {@code ithread} et {@code jthread} sont les indices du thread charge
-		 * des traitements.
+		 * {@code ithread} et {@code jthread} sont les indices du thread charge des
+		 * traitements.
 		 */
 		private final int ithread, jthread;
 
 		/**
 		 * {@code nthreads} et {@code mthreads} sont les nombres de partition,
-		 * respectivement sur les lignes et les colonnes de la matrice
-		 * resultante.
+		 * respectivement sur les lignes et les colonnes de la matrice resultante.
 		 */
 		private final int nthreads, mthreads;
 
 		/**
-		 * La fonction permettant d'additionner un element de type {@code R}
-		 * avec un element de type {@code R} et de retourner une element de type
-		 * {@code R}.
+		 * La fonction permettant d'additionner un element de type {@code R} avec un
+		 * element de type {@code R} et de retourner une element de type {@code R}.
 		 */
 		private final BiFunction<R, R, R> sumDataFunction;
 
 		/**
-		 * La fonction permettant de multiplier un element de type {@code T}
-		 * avec un element de type {@code U} et de retourner une element de type
-		 * {@code R}.
+		 * La fonction permettant de multiplier un element de type {@code T} avec un
+		 * element de type {@code U} et de retourner une element de type {@code R}.
 		 */
 		private final BiFunction<T, U, R> multiplyDataFunction;
 
 		/**
 		 * Constructeur permettant d'initialiser les membres de la classe.
 		 */
-		public ConcurrentMultiplication(Matrix<R> r, final Matrix<T> x,
-				final Matrix<U> y, final int nthreads, final int mthreads,
-				final int ithread, final int jthread,
-				final BiFunction<R, R, R> sumDataFunction,
+		public ConcurrentMultiplication(Matrix<R> r, final Matrix<T> x, final Matrix<U> y, final int nthreads,
+				final int mthreads, final int ithread, final int jthread, final BiFunction<R, R, R> sumDataFunction,
 				final BiFunction<T, U, R> multiplyDataFunction) {
 			this.x = x;
 			this.y = y;
@@ -1446,9 +1220,9 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		}
 
 		/**
-		 * Chaque thread, identifie par le couple {@code (ithread,jthread)}, est
-		 * charge de calculer la multiplication la partition de la partition de
-		 * la matrice resultant qui lui est dediee.
+		 * Chaque thread, identifie par le couple {@code (ithread,jthread)}, est charge
+		 * de calculer la multiplication la partition de la partition de la matrice
+		 * resultant qui lui est dediee.
 		 */
 		@Override
 		public void run() {
@@ -1469,17 +1243,12 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			for (int i1 = 0; i1 < n1; i1++)
 				// Boucle sur les colonnes de la partition resultante
 				for (int j1 = 0; j1 < m1; j1++) {
-					R a = multiplyDataFunction.apply(
-							x.data[(ithread * n) + i1][0],
-							y.data[0][(jthread * m) + j1]);
+					R a = multiplyDataFunction.apply(x.data[(ithread * n) + i1][0], y.data[0][(jthread * m) + j1]);
 					// Boucle sur les elements des partitions des matrices des
 					// termes de la multiplication
 					for (int k1 = 1; k1 < x.m; k1++)
-						a = sumDataFunction.apply(
-								a,
-								multiplyDataFunction.apply(x.data[(ithread * n)
-										+ i1][k1], y.data[k1][(jthread * m)
-										+ j1]));
+						a = sumDataFunction.apply(a, multiplyDataFunction.apply(x.data[(ithread * n) + i1][k1],
+								y.data[k1][(jthread * m) + j1]));
 					// Enregistrement d'un element de la partition resultante
 					r.data[(ithread * n) + i1][(jthread * m) + j1] = a;
 				}
@@ -1487,45 +1256,35 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Multiplication, parallele par multithreading, de deux matrices. Les
-	 * termes de la multiplication et son resultat sont integralement charges en
-	 * memoire.
+	 * Multiplication, parallele par multithreading, de deux matrices. Les termes de
+	 * la multiplication et son resultat sont integralement charges en memoire.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param <R>
-	 *            le type des elements de la matrice resultante
-	 * @param x
-	 *            un des termes de la multiplication
-	 * @param y
-	 *            un des termes de la multiplication
-	 * @param nthreads
-	 *            le nombre de thread qui est le nombre de partition sur les
-	 *            lignes de la matrice resultante
-	 * @param mthreads
-	 *            le nombre de thread qui est le nombre de partition sur les
-	 *            colonnes de la matrice resultante
-	 * @param sumDataFunction
-	 *            la fonction permettant d'additionner un element de type
-	 *            {@code R} avec un element de type {@code R} et de retourner
-	 *            une element de type {@code R}
-	 * @param multiplyDataFunction
-	 *            la fonction permettant de multiplier un element de type
-	 *            {@code T} avec un element de type {@code U} et de retourner
-	 *            une element de type {@code R}
+	 * @param <T>                  le type des elements d'un des termes
+	 * @param <U>                  le type des elements d'un des termes
+	 * @param <R>                  le type des elements de la matrice resultante
+	 * @param x                    un des termes de la multiplication
+	 * @param y                    un des termes de la multiplication
+	 * @param nthreads             le nombre de thread qui est le nombre de
+	 *                             partition sur les lignes de la matrice resultante
+	 * @param mthreads             le nombre de thread qui est le nombre de
+	 *                             partition sur les colonnes de la matrice
+	 *                             resultante
+	 * @param sumDataFunction      la fonction permettant d'additionner un element
+	 *                             de type {@code R} avec un element de type
+	 *                             {@code R} et de retourner une element de type
+	 *                             {@code R}
+	 * @param multiplyDataFunction la fonction permettant de multiplier un element
+	 *                             de type {@code T} avec un element de type
+	 *                             {@code U} et de retourner une element de type
+	 *                             {@code R}
 	 * @return une matrice resultante d'une multiplication
-	 * @throws MatrixBoundMultiplicationException
-	 *             cette exception est levee si
-	 *             {@code x.getWidth()!=y.getHeight()}
+	 * @throws MatrixBoundMultiplicationException cette exception est levee si
+	 *                                            {@code x.getWidth()!=y.getHeight()}
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Number, U extends Number, R extends Number> Matrix<R> multiply(
-			final Matrix<T> x, final Matrix<U> y, final int nthreads,
-			final int mthreads, final BiFunction<R, R, R> sumDataFunction,
-			final BiFunction<T, U, R> multiplyDataFunction)
-			throws MatrixBoundMultiplicationException {
+	public static <T extends Number, U extends Number, R extends Number> Matrix<R> multiply(final Matrix<T> x,
+			final Matrix<U> y, final int nthreads, final int mthreads, final BiFunction<R, R, R> sumDataFunction,
+			final BiFunction<T, U, R> multiplyDataFunction) throws MatrixBoundMultiplicationException {
 		if (x.m != y.n)
 			throw new MatrixBoundMultiplicationException();
 		Matrix<R> r;
@@ -1546,8 +1305,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			// Demarrer les threads
 			for (int i = 0; i < np; i++)
 				for (int j = 0; j < mp; j++)
-					executor.execute(new ConcurrentMultiplication<T, U, R>(r,
-							x, y, np, mp, i, j, sumDataFunction,
+					executor.execute(new ConcurrentMultiplication<T, U, R>(r, x, y, np, mp, i, j, sumDataFunction,
 							multiplyDataFunction));
 			// Demande au thread lance de se terminer quand leur traitement est
 			// termine
@@ -1561,19 +1319,16 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Classe soutraitant la multiplication parallele, par multithreading, de
-	 * deux matrices. Une instance de la classe est associee a un thread
-	 * executant une partie d'une multiplication de deux matrices. Les termes de
-	 * la multiplication et son resultat sont stockes sur disque. Des partitions
-	 * des termes de la multiplication sont chargees en memoire en fonction de
-	 * la partition a calculer, et chargee en memoire, de la matrice resultante.
+	 * Classe soutraitant la multiplication parallele, par multithreading, de deux
+	 * matrices. Une instance de la classe est associee a un thread executant une
+	 * partie d'une multiplication de deux matrices. Les termes de la multiplication
+	 * et son resultat sont stockes sur disque. Des partitions des termes de la
+	 * multiplication sont chargees en memoire en fonction de la partition a
+	 * calculer, et chargee en memoire, de la matrice resultante.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param <R>
-	 *            le type des elements de la matrice resultante
+	 * @param <T> le type des elements d'un des termes
+	 * @param <U> le type des elements d'un des termes
+	 * @param <R> le type des elements de la matrice resultante
 	 */
 	private static class ConcurrentBlocksMultiplication<T extends Number, U extends Number, R extends Number>
 			implements Runnable {
@@ -1588,8 +1343,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		private Matrix<U> y;
 
 		/**
-		 * Les flux permettant de lire les matrices des termes de la
-		 * multiplication.
+		 * Les flux permettant de lire les matrices des termes de la multiplication.
 		 */
 		private FSDataInputStream xIn, yIn;
 
@@ -1600,76 +1354,66 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		private final Map<BlockKey, Matrix<U>> yBlocks;
 
 		/**
-		 * {@code ithread} et {@code jthread} sont les indices du thread charge
-		 * des traitements.
+		 * {@code ithread} et {@code jthread} sont les indices du thread charge des
+		 * traitements.
 		 */
 		private final int ithread, jthread;
 
 		/**
 		 * {@code nthreads} et {@code mthreads} sont les nombres de partition,
-		 * respectivement sur les partitions sur les lignes et sur les
-		 * partitions sur les colonnes.
+		 * respectivement sur les partitions sur les lignes et sur les partitions sur
+		 * les colonnes.
 		 */
 		private final int nthreads, mthreads;
 
 		/**
-		 * {@code nbsize} et {@code mbsize} sont respectivement le nombre de
-		 * ligne et le nombre de colonne d'une partition de la matrice
-		 * resultante
+		 * {@code nbsize} et {@code mbsize} sont respectivement le nombre de ligne et le
+		 * nombre de colonne d'une partition de la matrice resultante
 		 */
 		private final int nbsize, mbsize;
 
 		/**
-		 * {@code kbsize} est le nombre de ligne et colonne d'une dimension
-		 * d'une partition des matrices des termes de la multiplication.
+		 * {@code kbsize} est le nombre de ligne et colonne d'une dimension d'une
+		 * partition des matrices des termes de la multiplication.
 		 */
 		private final int kbsize;
 
 		/**
-		 * {@code nb} et {@code mb} sont les nombres de partition,
-		 * respectivement sur les lignes et sur les colonnes de la matrice
-		 * resultante.
+		 * {@code nb} et {@code mb} sont les nombres de partition, respectivement sur
+		 * les lignes et sur les colonnes de la matrice resultante.
 		 */
 		private final int nb, mb;
 
 		/**
-		 * La configuration de l'environnement d'execution de Apache Hadoop.
-		 * Cette configuration permet de recuperer des parametres pour effectuer
-		 * des operations E/S.
+		 * La configuration de l'environnement d'execution de Apache Hadoop. Cette
+		 * configuration permet de recuperer des parametres pour effectuer des
+		 * operations E/S.
 		 */
 		private final Configuration conf;
 
 		/**
-		 * La fonction permettant d'additionner un element de type {@code R}
-		 * avec un element de type {@code R} et de retourner une element de type
-		 * {@code R}.
+		 * La fonction permettant d'additionner un element de type {@code R} avec un
+		 * element de type {@code R} et de retourner une element de type {@code R}.
 		 */
 		private final BiFunction<R, R, R> sumDataFunction;
 
 		/**
-		 * La fonction permettant de multiplier un element de type {@code T}
-		 * avec un element de type {@code U} et de retourner une element de type
-		 * {@code R}.
+		 * La fonction permettant de multiplier un element de type {@code T} avec un
+		 * element de type {@code U} et de retourner une element de type {@code R}.
 		 */
 		private final BiFunction<T, U, R> multiplyDataFunction;
 
 		/**
 		 * Constructeur permettant d'initialiser les membres de la classe.
 		 * 
-		 * @throws IOException
-		 *             une exception I/O a ete relevee
+		 * @throws IOException une exception I/O a ete relevee
 		 */
 		@SuppressWarnings("unchecked")
-		public ConcurrentBlocksMultiplication(final Path rPath,
-				final Path xPath, final Path yPath,
-				final Map<BlockKey, Matrix<T>> xBlocks,
-				final Map<BlockKey, Matrix<U>> yBlocks, final int ithread,
-				final int jthread, final int nbsize, final int mbsize,
-				final int kbsize, final int nb, final int mb,
-				final int nthreads, final int mthreads,
-				final Configuration conf,
-				final BiFunction<R, R, R> sumDataFunction,
-				final BiFunction<T, U, R> multiplyDataFunction)
+		public ConcurrentBlocksMultiplication(final Path rPath, final Path xPath, final Path yPath,
+				final Map<BlockKey, Matrix<T>> xBlocks, final Map<BlockKey, Matrix<U>> yBlocks, final int ithread,
+				final int jthread, final int nbsize, final int mbsize, final int kbsize, final int nb, final int mb,
+				final int nthreads, final int mthreads, final Configuration conf,
+				final BiFunction<R, R, R> sumDataFunction, final BiFunction<T, U, R> multiplyDataFunction)
 				throws IOException {
 			FileSystem fs = FileSystem.get(conf);
 			this.rPath = rPath;
@@ -1740,10 +1484,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 						// identifiees ci-dessus, des deux termes de la
 						// multiplication, apres que les elements soient lus
 						// dans leur flux respectif.
-						r = multiply(
-								readData(xIn, x, xi * nbsize, 0, a.n, a.m),
-								readData(yIn, y, 0, xj * mbsize, b.n, b.m),
-								sumDataFunction, multiplyDataFunction);
+						r = multiply(readData(xIn, x, xi * nbsize, 0, a.n, a.m),
+								readData(yIn, y, 0, xj * mbsize, b.n, b.m), sumDataFunction, multiplyDataFunction);
 						// Boucle sur les partitions des matrices des
 						// termes de la multiplication
 						for (int k = 1; k < mb; k++) {
@@ -1751,11 +1493,8 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 							b = yBlocks.get(yk.set(k, xj));
 							xIn.seek(HEADER_SIZE);
 							yIn.seek(HEADER_SIZE);
-							s = multiply(
-									readData(xIn, x, xi * nbsize, k * kbsize,
-											a.n, a.m),
-									readData(yIn, y, k * kbsize, xj * mbsize,
-											b.n, b.m), sumDataFunction,
+							s = multiply(readData(xIn, x, xi * nbsize, k * kbsize, a.n, a.m),
+									readData(yIn, y, k * kbsize, xj * mbsize, b.n, b.m), sumDataFunction,
 									multiplyDataFunction);
 							// Addition des resultats des precedentes
 							// multiplications. Les dimensions de la matrice
@@ -1769,8 +1508,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 								add(r, s, sumDataFunction, true);
 						}
 						// Sauvegarde d'une partition de la matrice resultante
-						FSDataOutputStream out = FileSystem.get(conf).create(
-								getPartitionPath(rPath, xi, xj));
+						FSDataOutputStream out = FileSystem.get(conf).create(getPartitionPath(rPath, xi, xj));
 						r.write(out);
 						out.close();
 					}
@@ -1793,38 +1531,25 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Joindre les partitions, stockees sur disque, resultantes d'une
-	 * multiplication de deux matrices et sauvegarde la matrice jointe sur
-	 * disque.
+	 * Joindre les partitions, stockees sur disque, resultantes d'une multiplication
+	 * de deux matrices et sauvegarde la matrice jointe sur disque.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param fs
-	 *            Le systeme de fichier ou les fichiers seront lu et ecrits
-	 * @param f
-	 *            le chemin correspondant au prefix des fichiers des partions à
-	 *            joindre et du fichier ou la matrice resultante sera stocker
-	 * @param x
-	 *            un des termes de la multiplication
-	 * @param y
-	 *            un des termes de la multiplication
-	 * @param delete
-	 *            si {@code true} alors les fichiers des partitions seront
-	 *            effaces apres la jointure
-	 * @param nb
-	 *            le nombre de partition a joindre
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
-	 * @throws MatrixBoundReadException
-	 *             une exception sur les bornes des partitions a lire a ete
-	 *             levee
+	 * @param <T>    le type des elements d'un des termes
+	 * @param <U>    le type des elements d'un des termes
+	 * @param fs     Le systeme de fichier ou les fichiers seront lu et ecrits
+	 * @param f      le chemin correspondant au prefix des fichiers des partions à
+	 *               joindre et du fichier ou la matrice resultante sera stocker
+	 * @param x      un des termes de la multiplication
+	 * @param y      un des termes de la multiplication
+	 * @param delete si {@code true} alors les fichiers des partitions seront
+	 *               effaces apres la jointure
+	 * @param nb     le nombre de partition a joindre
+	 * @throws IOException              une exception I/O a ete relevee
+	 * @throws MatrixBoundReadException une exception sur les bornes des partitions
+	 *                                  a lire a ete levee
 	 */
-	public static <T extends Number, U extends Number> void joinBlocks(
-			FileSystem fs, final Path f, final Matrix<T> x, final Matrix<U> y,
-			final int nb, final boolean delete) throws IOException,
-			MatrixBoundReadException {
+	public static <T extends Number, U extends Number> void joinBlocks(FileSystem fs, final Path f, final Matrix<T> x,
+			final Matrix<U> y, final int nb, final boolean delete) throws IOException, MatrixBoundReadException {
 		FSDataInputStream in;
 		FSDataOutputStream out = fs.create(f.suffix(".data"));
 		int nbsize = Math.floorDiv(x.n, nb);
@@ -1849,12 +1574,9 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Determine le nom du fichier d'une partition {@code (i,j}.
 	 * 
-	 * @param f
-	 *            le chemin correspondant au prefix des fichiers des partions
-	 * @param i
-	 *            indice d'une partition sur les lignes
-	 * @param j
-	 *            indice d'une partition sur les colonnes
+	 * @param f le chemin correspondant au prefix des fichiers des partions
+	 * @param i indice d'une partition sur les lignes
+	 * @param j indice d'une partition sur les colonnes
 	 * @return le chemin correspondant a la partition desiree
 	 */
 	public static Path getPartitionPath(final Path f, final int i, final int j) {
@@ -1862,67 +1584,54 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	}
 
 	/**
-	 * Multiplication, parallele par multithreading, de deux matrices. Les
-	 * termes de la multiplication et son resultat sont integralement stockes
-	 * sur disque.
+	 * Multiplication, parallele par multithreading, de deux matrices. Les termes de
+	 * la multiplication et son resultat sont integralement stockes sur disque.
 	 *
-	 * @param <T>
-	 *            le type des elements d'un des termes
-	 * @param <U>
-	 *            le type des elements d'un des termes
-	 * @param <R>
-	 *            le type des elements de la matrice resultante
-	 * @param rPath
-	 *            le chemin correspondant au prefix des fichiers des partions à
-	 *            joindre et du fichier ou la matrice resultante sera stocker
-	 * @param xPath
-	 *            le chemin correspondant au fichier d'une matrice des termes de
-	 *            la multiplication
-	 * @param yPath
-	 *            le chemin correspondant au fichier d'une matrice des termes de
-	 *            la multiplication
-	 * @param nb
-	 *            nombre de partition sur les lignes de la matrice resultante
-	 * @param mb
-	 *            nombre de partition sur les colonnes de la matrice resultante
-	 * @param nthreads
-	 *            le nombre de thread qui est le nombre de partition sur les
-	 *            partitions sur les lignes de la matrice resultante
-	 * @param mthreads
-	 *            le nombre de thread qui est le nombre de partition sur les
-	 *            partitions sur les colonnes de la matrice resultante
-	 * @param conf
-	 *            La configuration de l'environnement d'execution de Apache
-	 *            Hadoop. Cette configuration permet de recuperer des parametres
-	 *            pour effectuer des operations E/S.
-	 * @param sumDataFunction
-	 *            la fonction permettant d'additionner un element de type
-	 *            {@code R} avec un element de type {@code R} et de retourner
-	 *            une element de type {@code R}
-	 * @param multiplyDataFunction
-	 *            la fonction permettant de multiplier un element de type
-	 *            {@code T} avec un element de type {@code U} et de retourner
-	 *            une element de type {@code R}
-	 * @throws IOException
-	 *             une exception I/O a ete relevee
-	 * @throws MatrixBoundMultiplicationException
-	 *             cette exception est levee si
-	 *             {@code x.getWidth()!=y.getHeight()}
-	 * @throws MatrixBoundReadException
-	 *             une exception sur les bornes des partitions a lire a ete
-	 *             levee
-	 * @throws MatrixBoundWriteException
-	 *             une exception sur les bornes des partitions a ecrire a ete
-	 *             levee
+	 * @param <T>                  le type des elements d'un des termes
+	 * @param <U>                  le type des elements d'un des termes
+	 * @param <R>                  le type des elements de la matrice resultante
+	 * @param rPath                le chemin correspondant au prefix des fichiers
+	 *                             des partions à joindre et du fichier ou la
+	 *                             matrice resultante sera stocker
+	 * @param xPath                le chemin correspondant au fichier d'une matrice
+	 *                             des termes de la multiplication
+	 * @param yPath                le chemin correspondant au fichier d'une matrice
+	 *                             des termes de la multiplication
+	 * @param nb                   nombre de partition sur les lignes de la matrice
+	 *                             resultante
+	 * @param mb                   nombre de partition sur les colonnes de la
+	 *                             matrice resultante
+	 * @param nthreads             le nombre de thread qui est le nombre de
+	 *                             partition sur les partitions sur les lignes de la
+	 *                             matrice resultante
+	 * @param mthreads             le nombre de thread qui est le nombre de
+	 *                             partition sur les partitions sur les colonnes de
+	 *                             la matrice resultante
+	 * @param conf                 La configuration de l'environnement d'execution
+	 *                             de Apache Hadoop. Cette configuration permet de
+	 *                             recuperer des parametres pour effectuer des
+	 *                             operations E/S.
+	 * @param sumDataFunction      la fonction permettant d'additionner un element
+	 *                             de type {@code R} avec un element de type
+	 *                             {@code R} et de retourner une element de type
+	 *                             {@code R}
+	 * @param multiplyDataFunction la fonction permettant de multiplier un element
+	 *                             de type {@code T} avec un element de type
+	 *                             {@code U} et de retourner une element de type
+	 *                             {@code R}
+	 * @throws IOException                        une exception I/O a ete relevee
+	 * @throws MatrixBoundMultiplicationException cette exception est levee si
+	 *                                            {@code x.getWidth()!=y.getHeight()}
+	 * @throws MatrixBoundReadException           une exception sur les bornes des
+	 *                                            partitions a lire a ete levee
+	 * @throws MatrixBoundWriteException          une exception sur les bornes des
+	 *                                            partitions a ecrire a ete levee
 	 */
-	public static <T extends Number, U extends Number, R extends Number> void multiply(
-			final Path rPath, final Path xPath, final Path yPath, final int nb,
-			final int mb, final int nthreads, final int mthreads,
-			final Configuration conf,
-			final BiFunction<R, R, R> sumDataFunction,
-			final BiFunction<T, U, R> multiplyDataFunction) throws IOException,
-			MatrixBoundMultiplicationException, MatrixBoundReadException,
-			MatrixBoundWriteException {
+	public static <T extends Number, U extends Number, R extends Number> void multiply(final Path rPath,
+			final Path xPath, final Path yPath, final int nb, final int mb, final int nthreads, final int mthreads,
+			final Configuration conf, final BiFunction<R, R, R> sumDataFunction,
+			final BiFunction<T, U, R> multiplyDataFunction) throws IOException, MatrixBoundMultiplicationException,
+			MatrixBoundReadException, MatrixBoundWriteException {
 		FileSystem fs = FileSystem.get(conf);
 		FSDataInputStream xIn = fs.open(xPath), yIn = fs.open(yPath);
 		FSDataOutputStream out;
@@ -1950,8 +1659,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			readData(xIn, x);
 			y.data = y.newDataFunction.apply(y.n, y.m);
 			readData(yIn, y);
-			r = multiply(x, y, nthreads, mthreads, sumDataFunction,
-					multiplyDataFunction);
+			r = multiply(x, y, nthreads, mthreads, sumDataFunction, multiplyDataFunction);
 			// Sauvegarde de la matrice resultante
 			out = fs.create(rPath.suffix(".data"));
 			r.write(out);
@@ -1961,8 +1669,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		yIn.close();
 		if (np * mp > 1) {
 			// Creation d'un pool de thread
-			ExecutorService executor = Executors.newFixedThreadPool(nthreads
-					* mthreads);
+			ExecutorService executor = Executors.newFixedThreadPool(nthreads * mthreads);
 			// Creation des partitions d'un des termes de la multiplication
 			Map<BlockKey, Matrix<T>> xBlocks = toBlocks(x, nb, mb);
 			// Creation des partitions de l'autre terme de la multiplication
@@ -1979,10 +1686,9 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			// Demarrer les threads
 			for (int i = 0; i < nthreads; i++)
 				for (int j = 0; j < mthreads; j++)
-					executor.execute(new ConcurrentBlocksMultiplication<T, U, R>(
-							rPath, xPath, yPath, xBlocks, yBlocks, i, j,
-							nbsize, mbsize, kbsize, nb, mb, nthreads, mthreads,
-							conf, sumDataFunction, multiplyDataFunction));
+					executor.execute(new ConcurrentBlocksMultiplication<T, U, R>(rPath, xPath, yPath, xBlocks, yBlocks,
+							i, j, nbsize, mbsize, kbsize, nb, mb, nthreads, mthreads, conf, sumDataFunction,
+							multiplyDataFunction));
 			// Demande au thread lance de se terminer quand leur traitement est
 			// termine
 			executor.shutdown();
@@ -1995,17 +1701,14 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		}
 	}
 
-	public static Path checkConfigurationName(FileSystem fs,
-			Configuration conf, final String property, final Path prefix,
-			final boolean input) throws InvalidJobConfException, IOException {
+	public static Path checkConfigurationName(FileSystem fs, Configuration conf, final String property,
+			final Path prefix, final boolean input) throws InvalidJobConfException, IOException {
 		Path f = null;
 		String name = conf.get(property, null), err = null;
 		if (name == null)
-			err = new String("Le parametre " + property
-					+ " n'a pas ete renseigne.");
+			err = new String("Le parametre " + property + " n'a pas ete renseigne.");
 		else {
-			f = fs.makeQualified((prefix != null) ? new Path(prefix, name)
-					: new Path(name));
+			f = fs.makeQualified((prefix != null) ? new Path(prefix, name) : new Path(name));
 			if (input && !fs.exists(f))
 				err = new String(f.toString() + " n'existe pas.");
 		}
@@ -2017,35 +1720,25 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 	/**
 	 * Multiply.
 	 *
-	 * @param <T>
-	 *            the generic type
-	 * @param <U>
-	 *            the generic type
-	 * @param <R>
-	 *            the generic type
-	 * @param conf
-	 *            the conf
-	 * @param sumDataFunction
-	 *            the sum data function
-	 * @param multiplyDataFunction
-	 *            the multiply data function
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws MatrixBoundMultiplicationException
-	 *             the matrix bound multiplication exception
-	 * @throws MatrixBoundReadException
-	 *             the matrix bound read exception
-	 * @throws ClassNotFoundException
-	 *             the class not found exception
-	 * @throws InterruptedException
-	 *             the interrupted exception
+	 * @param <T>                  the generic type
+	 * @param <U>                  the generic type
+	 * @param <R>                  the generic type
+	 * @param conf                 the conf
+	 * @param sumDataFunction      the sum data function
+	 * @param multiplyDataFunction the multiply data function
+	 * @throws IOException                        Signals that an I/O exception has
+	 *                                            occurred.
+	 * @throws MatrixBoundMultiplicationException the matrix bound multiplication
+	 *                                            exception
+	 * @throws MatrixBoundReadException           the matrix bound read exception
+	 * @throws ClassNotFoundException             the class not found exception
+	 * @throws InterruptedException               the interrupted exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Number, U extends Number, R extends Number> int multiply(
-			Configuration conf, final BiFunction<R, R, R> sumDataFunction,
-			final BiFunction<T, U, R> multiplyDataFunction) throws IOException,
-			MatrixBoundMultiplicationException, MatrixBoundReadException,
-			ClassNotFoundException, InterruptedException {
+	public static <T extends Number, U extends Number, R extends Number> int multiply(Configuration conf,
+			final BiFunction<R, R, R> sumDataFunction, final BiFunction<T, U, R> multiplyDataFunction)
+			throws IOException, MatrixBoundMultiplicationException, MatrixBoundReadException, ClassNotFoundException,
+			InterruptedException {
 		FileSystem fs = FileSystem.get(conf);
 		Path inputDir, xPath, yPath, rPath, outputDir;
 		FSDataInputStream xIn, yIn;
@@ -2053,21 +1746,14 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 		Matrix<T> x = new Matrix<T>();
 		Matrix<U> y = new Matrix<U>();
 		Matrix<R> r;
-		int nb = conf.getInt(MatrixParameter.nBlocks, 0), mb = conf.getInt(
-				MatrixParameter.mBlocks, 0);
-		int nthreads = conf.getInt(MatrixParameter.nThreads, 0), mthreads = conf
-				.getInt(MatrixParameter.mThreads, 0);
+		int nb = conf.getInt(MatrixParameter.nBlocks, 0), mb = conf.getInt(MatrixParameter.mBlocks, 0);
+		int nthreads = conf.getInt(MatrixParameter.nThreads, 0), mthreads = conf.getInt(MatrixParameter.mThreads, 0);
 		int result = 1;
-		inputDir = checkConfigurationName(fs, conf, MatrixParameter.inputDir,
-				null, true);
-		xPath = checkConfigurationName(fs, conf, MatrixParameter.xFilename,
-				inputDir, true);
-		yPath = checkConfigurationName(fs, conf, MatrixParameter.yFilename,
-				inputDir, true);
-		outputDir = checkConfigurationName(fs, conf, MatrixParameter.outputDir,
-				null, false);
-		rPath = checkConfigurationName(fs, conf,
-				MatrixParameter.rPrefixFilename, outputDir, false);
+		inputDir = checkConfigurationName(fs, conf, MatrixParameter.inputDir, null, true);
+		xPath = checkConfigurationName(fs, conf, MatrixParameter.xFilename, inputDir, true);
+		yPath = checkConfigurationName(fs, conf, MatrixParameter.yFilename, inputDir, true);
+		outputDir = checkConfigurationName(fs, conf, MatrixParameter.outputDir, null, false);
+		rPath = checkConfigurationName(fs, conf, MatrixParameter.rPrefixFilename, outputDir, false);
 		xIn = fs.open(xPath);
 		yIn = fs.open(yPath);
 		x = (Matrix<T>) readHeader(xIn);
@@ -2083,8 +1769,7 @@ public class Matrix<T extends Number> implements WritableComparable<Matrix<T>> {
 			readData(xIn, x);
 			y.data = y.newDataFunction.apply(y.n, y.m);
 			readData(yIn, y);
-			r = multiply(x, y, nthreads, mthreads, sumDataFunction,
-					multiplyDataFunction);
+			r = multiply(x, y, nthreads, mthreads, sumDataFunction, multiplyDataFunction);
 			out = fs.create(rPath.suffix(".data"));
 			r.write(out);
 			out.close();

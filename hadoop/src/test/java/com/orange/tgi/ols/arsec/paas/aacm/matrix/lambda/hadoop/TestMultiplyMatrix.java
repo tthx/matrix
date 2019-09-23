@@ -16,16 +16,11 @@ import org.apache.hadoop.util.ToolRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.DataOperator;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiply;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:META-INF/spring/applicationContext.xml" })
 public class TestMultiplyMatrix {
 	private static final Log LOG = LogFactory.getLog(TestMultiplyMatrix.class);
 

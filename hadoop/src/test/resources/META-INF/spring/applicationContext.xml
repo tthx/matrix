@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hdp="http://www.springframework.org/schema/hadoop"
-	xmlns:yarn="http://www.springframework.org/schema/yarn" xmlns:yarn-int="http://www.springframework.org/schema/yarn/integration"
-	xmlns:yarn-batch="http://www.springframework.org/schema/yarn/batch"
-	xsi:schemaLocation="
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:hdp="http://www.springframework.org/schema/hadoop"
+  xmlns:yarn="http://www.springframework.org/schema/yarn"
+  xmlns:yarn-int="http://www.springframework.org/schema/yarn/integration"
+  xmlns:yarn-batch="http://www.springframework.org/schema/yarn/batch"
+  xsi:schemaLocation="
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop-2.0.xsd
 	http://www.springframework.org/schema/yarn http://www.springframework.org/schema/yarn/spring-yarn-2.0.xsd
     http://www.springframework.org/schema/yarn/integration http://www.springframework.org/schema/yarn/integration/spring-yarn-integration-2.0.xsd
     http://www.springframework.org/schema/yarn/batch http://www.springframework.org/schema/yarn/batch/spring-yarn-batch-2.0.xsd">
-
-	<hdp:configuration id="hadoopConfiguration"
-		resources="file:///${HADOOP_CONF_DIR}/core-site.xml, 
+  <hdp:configuration id="hadoopConfiguration"
+    resources="file:///${HADOOP_CONF_DIR}/core-site.xml, 
 		file:///${HADOOP_CONF_DIR}/hdfs-site.xml, file:///${HADOOP_CONF_DIR}/mapred-site.xml, 
 		file:///${HADOOP_CONF_DIR}/yarn-site.xml, file:///${HADOOP_CONF_DIR}/capacity-scheduler.xml" />
-
-	<yarn:configuration id="yarnConfiguration"
-		resources="file:///${HADOOP_CONF_DIR}/core-site.xml, 
+  <yarn:configuration id="yarnConfiguration"
+    resources="file:///${HADOOP_CONF_DIR}/core-site.xml, 
 		file:///${HADOOP_CONF_DIR}/hdfs-site.xml, file:///${HADOOP_CONF_DIR}/mapred-site.xml, 
 		file:///${HADOOP_CONF_DIR}/yarn-site.xml, file:///${HADOOP_CONF_DIR}/capacity-scheduler.xml" />
-
-	<hdp:job id="matrixMultiplyJobConfiguration" configuration-ref="hadoopConfiguration"
-		properties-location="classpath:/META-INF/hadoop/matrix-multiplication.properties" />
-
-	<hdp:job-runner id="matrixMultiplyJobRunner"
-		run-at-startup="false" job-ref="matrixMultiplyJobConfiguration" />
+  <hdp:job id="matrixMultiplyJobConfiguration"
+    configuration-ref="hadoopConfiguration"
+    properties-location="classpath:/META-INF/hadoop/matrix-multiplication.properties" />
+  <hdp:job-runner id="matrixMultiplyJobRunner"
+    run-at-startup="false" job-ref="matrixMultiplyJobConfiguration" />
 </beans>

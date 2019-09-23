@@ -28,15 +28,15 @@ public class MatrixMultiply {
     JavaRDD<Vector> rows = sc.parallelize(Vectors.zeros(n*m));
   }
   
-  public void createIndexedRowMatrix(int n, int m) {
+  public void createIndexedRowMatrix(JavaSparkContext sc, int n, int m) {
     
   }
   
-  public void createCoordinateMatrix(int n, int m) {
+  public void createCoordinateMatrix(JavaSparkContext sc, int n, int m) {
     
   }
   
-  public void createBlockMatrix(int n, int m) {
+  public void createBlockMatrix(JavaSparkContext sc, int n, int m) {
     
   }
 
