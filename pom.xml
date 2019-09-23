@@ -5,8 +5,12 @@
   <groupId>com.orange.tgi.ols.arsec.paas.aacm</groupId>
   <artifactId>matrix-multiply</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
   <name>matrix-multiply</name>
+  <modules>
+    <module>hadoop</module>
+    <module>spark</module>
+  </modules>
   <properties>
     <java.version>12</java.version>
     <encoding>UTF-8</encoding>
@@ -19,10 +23,38 @@
     <netlib.version>1.1.2</netlib.version>
     <hadoop.version>3.2.0</hadoop.version>
     <junit.version>4.12</junit.version>
+    <spring-data-hadoop.version>2.5.0.RELEASE</spring-data-hadoop.version>
+    <junit-benchmarks.version>0.7.2</junit-benchmarks.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
+    <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-client</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-servlet</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-hadoop</artifactId>
+      <version>${spring-data-hadoop.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_${scala.major.version}</artifactId>
@@ -69,29 +101,15 @@
       <type>pom</type>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-client</artifactId>
-      <version>${hadoop.version}</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.sun.jersey</groupId>
-          <artifactId>jersey-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.sun.jersey</groupId>
-          <artifactId>jersey-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.sun.jersey</groupId>
-          <artifactId>jersey-servlet</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.carrotsearch</groupId>
+      <artifactId>junit-benchmarks</artifactId>
+      <version>${junit-benchmarks.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -111,7 +129,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>${maven-assembly-plugin.version}</version>
+        <version>${maven-assembly-plugin.version}</version><!--$NO-MVN-MAN-VER$-->
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -123,7 +141,7 @@
             <phase>package</phase>
             <goals>
               <goal>single</goal>
-            </goals><!--$NO-MVN-MAN-VER$-->
+            </goals>
           </execution>
         </executions>
       </plugin>
