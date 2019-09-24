@@ -6,14 +6,16 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.HadoopTestCase;
+
 import org.junit.Test;
 
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundAdditionException;
@@ -24,7 +26,7 @@ import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundWriteExcep
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixParameter;
 
 public class MatrixTest extends HadoopTestCase {
-  private static final Log LOG = LogFactory.getLog(MatrixTest.class);
+  private static final Logger logger = LogManager.getLogger(MatrixTest.class);
 
   public MatrixTest() throws IOException {
     super(LOCAL_MR, LOCAL_FS, 1, 1);
