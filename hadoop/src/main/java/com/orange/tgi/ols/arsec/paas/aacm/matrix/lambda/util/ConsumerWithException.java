@@ -6,5 +6,5 @@ package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.util;
  */
 @FunctionalInterface
 public interface ConsumerWithException<T, E extends Exception> {
-	void apply(T x) throws E;
+  void apply(T x) throws E;
 }

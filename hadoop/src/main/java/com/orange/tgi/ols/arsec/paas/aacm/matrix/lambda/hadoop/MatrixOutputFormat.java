@@ -10,33 +10,32 @@ import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter;
 
-import com.orange.imt.ist.isad.stag.matrix.lambda.BlockKey;
-import com.orange.imt.ist.isad.stag.matrix.lambda.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
 
-public class MatrixOutputFormat<T extends Number> extends
-		OutputFormat<BlockKey, Matrix<T>> {
+public class MatrixOutputFormat<T extends Number>
+    extends OutputFormat<BlockKey, Matrix<T>> {
 
-	@Override
-	public void checkOutputSpecs(JobContext jobContext) throws IOException,
-			InterruptedException {
+  @Override
+  public void checkOutputSpecs(JobContext jobContext)
+      throws IOException, InterruptedException {
 
-	}
+  }
 
-	@Override
-	public OutputCommitter getOutputCommitter(
-			TaskAttemptContext taskAttemptContext) throws IOException,
-			InterruptedException {
-		return new FileOutputCommitter(
-				new Path(taskAttemptContext.getConfiguration().get(
-						MatrixParameter.rPrefixFilename, null)),
-				taskAttemptContext);
-	}
+  @Override
+  public OutputCommitter
+      getOutputCommitter(TaskAttemptContext taskAttemptContext)
+          throws IOException, InterruptedException {
+    return new FileOutputCommitter(new Path(taskAttemptContext
+        .getConfiguration().get(MatrixParameter.rPrefixFilename, null)),
+        taskAttemptContext);
+  }
 
-	@Override
-	public RecordWriter<BlockKey, Matrix<T>> getRecordWriter(
-			TaskAttemptContext taskAttemptContext) throws IOException,
-			InterruptedException {
-		return new MatrixRecordWriter<T>(taskAttemptContext);
-	}
+  @Override
+  public RecordWriter<BlockKey, Matrix<T>>
+      getRecordWriter(TaskAttemptContext taskAttemptContext)
+          throws IOException, InterruptedException {
+    return new MatrixRecordWriter<T>(taskAttemptContext);
+  }
 
 }

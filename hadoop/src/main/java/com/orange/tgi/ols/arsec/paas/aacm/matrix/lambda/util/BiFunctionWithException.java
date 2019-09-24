@@ -6,5 +6,5 @@ package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.util;
  */
 @FunctionalInterface
 public interface BiFunctionWithException<T, R, U, E extends Exception> {
-	U apply(T x, R y) throws E;
+  U apply(T x, R y) throws E;
 }
