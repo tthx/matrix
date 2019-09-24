@@ -3,12 +3,13 @@ package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.number;
 import java.math.BigDecimal;
 
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiply;
 
 public class BigDecimalMatrixMultiply
-    extends MatrixMultiply<BigDecimal, BigDecimal, BigDecimal> {
+    extends MatrixMultiply<BigDecimal, BigDecimal, BigDecimal> implements Tool {
 
   public static void main(String[] args) throws Exception {
     int res = 1;

@@ -6,16 +6,13 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.HadoopTestCase;
-
+import org.junit.After;
 import org.junit.Test;
 
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundAdditionException;
@@ -26,10 +23,17 @@ import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundWriteExcep
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixParameter;
 
 public class MatrixTest extends HadoopTestCase {
-  private static final Logger logger = LogManager.getLogger(MatrixTest.class);
 
+  private final Path testDir= new Path("/tmp/matrix");
+  
   public MatrixTest() throws IOException {
     super(LOCAL_MR, LOCAL_FS, 1, 1);
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    getFileSystem().delete(testDir, true);
+    super.tearDown();
   }
 
   @Test
@@ -316,7 +320,7 @@ public class MatrixTest extends HadoopTestCase {
   public void IO() throws NumberFormatException, IOException {
     Configuration conf = createJobConf();
     FileSystem fs = FileSystem.get(conf);
-    Path f = new Path("bigdecimalmatrix.data");
+    Path f = testDir.suffix("/bigdecimalmatrix.data");
     Matrix<BigDecimal> a = (Matrix<BigDecimal>) Matrix.builder(5, 10,
         Matrix.DataType.BigDecimal, true, null, true, conf, f);
     FSDataInputStream in = fs.open(f);
@@ -334,7 +338,7 @@ public class MatrixTest extends HadoopTestCase {
     int i0 = 5, j0 = 10, n = 5, m = 5;
     Configuration conf = createJobConf();
     FileSystem fs = FileSystem.get(conf);
-    Path f = new Path("bigdecimalmatrix.data");
+    Path f = testDir.suffix("/bigdecimalmatrix.data");
     Matrix<BigDecimal> a = (Matrix<BigDecimal>) Matrix.builder(10, 20,
         Matrix.DataType.BigDecimal, true, null, true, conf, f);
     c1 = Matrix.copy(a, i0, j0, n, m);
@@ -359,7 +363,7 @@ public class MatrixTest extends HadoopTestCase {
   public void integerCopyIO() throws IOException, MatrixBoundCopyException,
       MatrixBoundReadException, MatrixBoundWriteException {
     Configuration conf = createJobConf();
-    Path f = new Path("integermatrix.data");
+    Path f = testDir.suffix("/integermatrix.data");
     FileSystem fs = FileSystem.get(conf);
     Matrix<Integer> a = (Matrix<Integer>) Matrix.builder(10, 20,
         Matrix.DataType.Integer, true, null, true, conf, f);
@@ -387,7 +391,7 @@ public class MatrixTest extends HadoopTestCase {
   public void doubleCopyIO() throws IOException, MatrixBoundCopyException,
       MatrixBoundReadException, MatrixBoundWriteException {
     Configuration conf = createJobConf();
-    Path f = new Path("doublematrix.data");
+    Path f = testDir.suffix("/doublematrix.data");
     FileSystem fs = FileSystem.get(conf);
     Matrix<Double> a = (Matrix<Double>) Matrix.builder(10, 20,
         Matrix.DataType.Double, true, null, true, conf, f);
