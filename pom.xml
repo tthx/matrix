@@ -13,13 +13,13 @@
     <module>spark</module>
   </modules>
   <properties>
-    <java.version>12</java.version>
+    <java.version>13</java.version>
     <encoding>UTF-8</encoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <log4j.version>2.12.1</log4j.version>
     <commons-cli.version>1.4</commons-cli.version>
-    <hadoop.version>3.2.0</hadoop.version>
+    <hadoop.version>3.2.1</hadoop.version>
     <junit.version>4.12</junit.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
