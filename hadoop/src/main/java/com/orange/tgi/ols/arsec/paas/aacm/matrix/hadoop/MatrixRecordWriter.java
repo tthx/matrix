@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import java.io.IOException;
 
@@ -9,33 +9,28 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
 
-/** {@inheritDoc} */
-public class MatrixFileRecordWriter<T extends Number>
+public class MatrixRecordWriter<T extends Number>
     extends RecordWriter<BlockKey, Matrix<T>> {
   private final Configuration conf;
 
-  public MatrixFileRecordWriter(TaskAttemptContext taskAttemptContext) {
+  public MatrixRecordWriter(TaskAttemptContext taskAttemptContext) {
     conf = taskAttemptContext.getConfiguration();
   }
 
-  /** {@inheritDoc} */
   @Override
   public void close(TaskAttemptContext taskAttemptContext)
       throws IOException, InterruptedException {
   }
 
-  /** {@inheritDoc} */
   @Override
   public void write(BlockKey key, Matrix<T> x)
       throws IOException, InterruptedException {
     FSDataOutputStream out = FileSystem.get(conf)
-        .create(Matrix.getPartitionPath(
-            new Path(conf.get(MatrixParameter.outputDir, null),
-                conf.get(MatrixParameter.rPrefixFilename, null)),
-            key.geti(), key.getj()));
+        .create(new Path(conf.get(MatrixParameter.rPrefixFilename, ""))
+            .suffix("." + key.geti() + "." + key.getj() + ".data"));
     x.write(out);
     out.close();
   }

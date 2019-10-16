@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -6,9 +6,9 @@ import java.util.function.BiFunction;
 
 import org.apache.hadoop.mapreduce.Reducer;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.DataOperator;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.DataOperator;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundAdditionException;
 
 public class MatrixSumReducer<T extends Number>

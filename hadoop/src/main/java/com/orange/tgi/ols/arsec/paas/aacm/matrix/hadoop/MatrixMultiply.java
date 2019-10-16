@@ -1,12 +1,12 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.mapred.InvalidJobConfException;
 import org.apache.hadoop.util.Tool;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.DataOperator;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.DataOperator;
 
 public class MatrixMultiply<T extends Number, U extends Number,
     R extends Number> extends Configured implements Tool {

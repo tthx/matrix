@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import java.io.DataInput;
 import java.io.DataOutput;

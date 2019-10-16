@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +20,7 @@ import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundCopyExcept
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundMultiplicationException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundReadException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundWriteException;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixParameter;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixParameter;
 
 public class MatrixTest extends HadoopTestCase {
 

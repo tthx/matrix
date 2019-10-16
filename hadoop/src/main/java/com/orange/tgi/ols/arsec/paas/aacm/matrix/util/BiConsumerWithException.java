@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.util;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.util;
 
 /**
  * Une interface permettant d'etendre l'interface

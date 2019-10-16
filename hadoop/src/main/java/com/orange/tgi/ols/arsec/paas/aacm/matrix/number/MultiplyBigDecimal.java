@@ -1,8 +1,8 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.number;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.number;
 
 import java.math.BigDecimal;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiply;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixMultiply;
 
 public class MultiplyBigDecimal
     extends MatrixMultiply<BigDecimal, BigDecimal, BigDecimal> {

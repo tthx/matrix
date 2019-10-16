@@ -1,11 +1,11 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import org.apache.hadoop.conf.Configurable;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.mapreduce.Partitioner;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
 
 /** {@inheritDoc} */
 public class MatrixPartitioner<T extends Number>

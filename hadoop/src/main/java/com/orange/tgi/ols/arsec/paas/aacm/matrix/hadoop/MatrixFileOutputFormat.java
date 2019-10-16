@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import java.io.IOException;
 
@@ -11,8 +11,8 @@ import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
 
 /** {@inheritDoc} */
 public class MatrixFileOutputFormat<T extends Number>

@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,9 +18,10 @@ import org.apache.hadoop.util.ToolRunner;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.DataOperator;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiply;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.DataOperator;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixMultiply;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixParameter;
 
 public class TestMultiplyMatrix extends HadoopTestCase {
   private static final Logger logger =

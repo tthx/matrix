@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix;
 
 import java.io.DataInput;
 import java.io.DataOutput;

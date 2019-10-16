@@ -1,7 +1,7 @@
 /*
  * 
  */
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -31,16 +31,16 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixFileOutputFormat;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixInputFormat;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiply;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiplyAndSumMapper;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixMultiplyMapper;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixParameter;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop.MatrixSumReducer;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.util.BiConsumerWithException;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.util.FunctionWithException;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixFileOutputFormat;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixInputFormat;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixMultiply;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixMultiplyAndSumMapper;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixMultiplyMapper;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixParameter;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop.MatrixSumReducer;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.util.BiConsumerWithException;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.util.FunctionWithException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundAdditionException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundCopyException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundMultiplicationException;

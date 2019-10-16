@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import java.io.IOException;
 import java.util.Map;
@@ -11,12 +11,12 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Mapper;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.DataOperator;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.DataOperator;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundAdditionException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundMultiplicationException;
 import com.orange.tgi.ols.arsec.paas.aacm.matrix.exception.MatrixBoundReadException;
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.Matrix;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.Matrix;
 
 /** {@inheritDoc} */
 public class MatrixMultiplyAndSumMapper<T extends Number, U extends Number,

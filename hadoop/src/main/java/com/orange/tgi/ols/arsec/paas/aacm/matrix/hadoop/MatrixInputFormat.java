@@ -1,4 +1,4 @@
-package com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.hadoop;
+package com.orange.tgi.ols.arsec.paas.aacm.matrix.hadoop;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import org.apache.hadoop.mapreduce.JobContext;
 import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 
-import com.orange.tgi.ols.arsec.paas.aacm.matrix.lambda.BlockKey;
+import com.orange.tgi.ols.arsec.paas.aacm.matrix.BlockKey;
 
 /** {@inheritDoc} */
 public class MatrixInputFormat extends InputFormat<BlockKey, NullWritable> {
