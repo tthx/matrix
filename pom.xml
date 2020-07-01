@@ -17,7 +17,7 @@
     <encoding>UTF-8</encoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <log4j.version>2.12.1</log4j.version>
+    <log4j.version>2.13.3</log4j.version>
     <commons-cli.version>1.4</commons-cli.version>
     <hadoop.version>3.2.1</hadoop.version>
     <scala.major.version>2.12</scala.major.version>
